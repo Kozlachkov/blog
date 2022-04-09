@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="test4" />
+        <module name="test5" />
+        <module name="test3" />
+        <module name="Lesson21" />
+        <module name="test6" />
+        <module name="Lesson27_ss1" />
+        <module name="Lesson27" />
+        <module name="webCalc" />
+        <module name="Lesson24" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Lesson21" options="-parameters" />
+      <module name="Lesson24" options="-parameters" />
+      <module name="Lesson27" options="-parameters" />
+      <module name="Lesson27_ss1" options="-parameters" />
+      <module name="test3" options="-parameters" />
+      <module name="test4" options="-parameters" />
+      <module name="test5" options="-parameters" />
+      <module name="test6" options="-parameters" />
+      <module name="webCalc" options="-parameters" />
+    </option>
+  </component>
+</project>
