@@ -12,11 +12,11 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/people")
-public class PeopleControllers {
+public class MainControllers {
 
     private PersonDao personDao;
     @Autowired
-    public PeopleControllers(PersonDao personDao) {
+    public MainControllers(PersonDao personDao) {
         this.personDao = personDao;
     }
 

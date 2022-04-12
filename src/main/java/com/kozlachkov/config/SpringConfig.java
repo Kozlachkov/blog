@@ -56,10 +56,4 @@ public class SpringConfig implements WebMvcConfigurer  {
         return new JdbcTemplate(datasSource());
     }
 
-    /*
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("people/login");
-    }*/
-
-
 }
