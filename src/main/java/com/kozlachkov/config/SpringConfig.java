@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
@@ -24,10 +25,12 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan ("com.kozlachkov")
-@EnableWebMvc
+//@EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer  {
 
     private final ApplicationContext applicationContext;
+    @Autowired
+    private Environment env;
 
     @Autowired
     public SpringConfig(ApplicationContext applicationContext) {
@@ -44,10 +47,10 @@ public class SpringConfig implements WebMvcConfigurer  {
     @Bean //данные для БД
     public DataSource datasSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/javastudy");
-        dataSource.setUsername("roman");
-        dataSource.setPassword("roman");
+        dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+        dataSource.setUrl(env.getProperty("jdbc.url"));
+        dataSource.setUsername(env.getProperty("jdbc.username"));
+        dataSource.setPassword(env.getProperty("jdbc.password"));
         return dataSource;
     }
 
