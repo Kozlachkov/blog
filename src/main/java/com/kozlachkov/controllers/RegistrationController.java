@@ -1,5 +1,5 @@
 package com.kozlachkov.controllers;
-
+/*
 import com.kozlachkov.models.Person;
 import com.kozlachkov.models.Roles;
 import com.kozlachkov.models.UserDB;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Map;
+
 
 @Controller
 @RequestMapping("/people")
@@ -43,4 +44,4 @@ public class RegistrationController {
         return "redirect:/people/login";
     }
 
-}
+}*/

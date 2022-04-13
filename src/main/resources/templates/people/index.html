@@ -3,18 +3,83 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Все люди</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>All people</title>
+    <link href="../../StyleCSS.css" th:href="@{/StyleCSS.css}" rel="stylesheet" type="text/css" media="all" />
 </head>
-
+<!-- -->
 <body>
+<!-- HEADER -->
+<table width="1000px" border="0" align="center" cellpadding="0" cellspacing="0" >
+  <tr height="40px" >
+    <td width="400px" class="TextName" align="center">Заголовок</td>
+    <td> <img src="pics/index/heading.jpg" width="624px"  height="40" /></td>
+  </tr>
+</table>
 
-<div th:each="person : ${people}">
-    <a th:href="@{/people/{id}(id=${person.getId()})}"
-       th:text="${person.getName()} + ', ' + ${person.getAge()}">user</a>
-</div>
-</br>
- <a href="/people/new">Add new one</a>
+
+<table  width="1000px" border="0" align="center" cellpadding="0" cellspacing="0">  
+  <tr height="400px">
+    <td width="170px" class="RightBorder1" align="center" valign="top">
+      <div class=" TextGeorgia">
+			левая колонка            
+      </div>   
+    </td>
+	<td class="PaddingUsual1" align="left" valign="top"> 
+    <br/>
+    	Основная колонка
+
+        <div th:each="person : ${people}">
+            <a th:href="@{/people/{id}(id=${person.getId()})}"
+               th:text="${person.getName()} + ', ' + ${person.getAge()}">user</a>
+        </div>
+        </br>
+         <a href="/people/new">Add new one</a>
+
+	</td>
+    <td width="170px" class="LeftBorder1" align="center" valign="top">
+
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        Please Login:</br>
+ 
+         <form action="@{/people/login}" method="POST">
+          <div>
+              <label for="name">Username:</label>
+              <input type="text" id="name" name="username">
+          </div>
+          <div>
+              <label for="pass">Password:</label>
+              <input type="password" id="pass" name="password">
+          </div>
+          <div>
+              <input type="submit" value="Sign In"/>
+          </div>
+        </form>
+       <!--        
+        <form action="@{/people/login}" method="POST">
+          <ul>
+            <li>
+              <label for="name">Username:</label>
+              <input type="text" id="name" name="username">
+            </li>
+            <li>
+              <label for="pass">Password:</label>
+              <input type="password" id="pass" name="password">
+            </li>
+            <li>
+              <input type="submit" value="Sign In"/>
+            </li>
+          </ul>
+        </form> -->
+    </td>
+  </tr>
+</table>
+
 
 </body>
 

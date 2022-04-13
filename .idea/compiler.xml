@@ -12,7 +12,9 @@
         <module name="Lesson21" />
         <module name="test6" />
         <module name="Lesson27_ss1" />
+        <module name="myBlog" />
         <module name="Lesson27" />
+        <module name="Lesson27_ss2" />
         <module name="webCalc" />
         <module name="Lesson24" />
       </profile>
@@ -24,6 +26,8 @@
       <module name="Lesson24" options="-parameters" />
       <module name="Lesson27" options="-parameters" />
       <module name="Lesson27_ss1" options="-parameters" />
+      <module name="Lesson27_ss2" options="-parameters" />
+      <module name="myBlog" options="-parameters" />
       <module name="test3" options="-parameters" />
       <module name="test4" options="-parameters" />
       <module name="test5" options="-parameters" />

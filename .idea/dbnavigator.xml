@@ -17,7 +17,7 @@
       <scope value="GLOBAL" />
       <destination value="FILE" />
       <format value="EXCEL" />
-      <charset value="windows-1251" />
+      <charset value="windows-1252" />
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -82,7 +82,7 @@
           <database value="javastudy" />
           <type value="USER_PASSWORD" />
           <user value="roman" />
-          <deprecated-pwd value="cm9tYW4=" />
+          <deprecated-pwd value="REJzdXJsZXZlcnNhbnQ=" />
         </database>
         <properties>
           <auto-commit value="false" />
