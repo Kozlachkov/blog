@@ -7,6 +7,9 @@ ul {list-style-type: square;}
 img {border:0;}
 
 
+.myInput1{width:110px; padding-left:10px; }
+.myInput_txt1{text-align:left; padding-left:10px;}
+
  .LeftColumn {padding-left: 40px; font-size: 16px; color:#06F; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; }
  .RightBorder1 {border-right:double; border-width: 5px;}
  .LeftBorder1 {border-left:double; border-width: 5px;}

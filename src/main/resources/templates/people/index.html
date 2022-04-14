@@ -5,18 +5,19 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>All people</title>
-    <link href="../../static/css/StyleCSS.css" th:href="@{static/css/StyleCSS.css}" rel="stylesheet" type="text/css" media="all" />
+    <link href="../../css/StyleCSS.css" th:href="@{css/StyleCSS.css}" rel="stylesheet" type="text/css" media="all" />
 </head>
 <!-- -->
 <body>
 <!-- HEADER -->
 <table width="1000px" border="0" align="center" cellpadding="0" cellspacing="0" >
   <tr height="40px" >
-    <td width="400px" class="TextName" align="center">Заголовок</td>
-    <td> <img src="pics/index/heading.jpg" width="624px"  height="40" /></td>
+    <td width="400px" class="TextName" align="center">Blogs</td>
+    <td> <img src="../../images/heading.jpg" th:src="@{images/heading.jpg}" width="624px"  height="40" /></td>
   </tr>
 </table>
 
+<!-- src="../../images/heading.jpg" -->
 
 <table  width="1000px" border="0" align="center" cellpadding="0" cellspacing="0">  
   <tr height="400px">
@@ -45,20 +46,28 @@
         <div th:if="${param.logout}">
             You have been logged out.
         </div>
-        Please Login:</br>
+        Залогиньтесь:</br></br>
  
          <form action="@{/people/login}" method="POST">
-          <div>
-              <label for="name">Username:</label>
-              <input type="text" id="name" name="username">
-          </div>
-          <div>
-              <label for="pass">Password:</label>
-              <input type="password" id="pass" name="password">
-          </div>
-          <div>
-              <input type="submit" value="Sign In"/>
-          </div>
+          	<table border="0" cellspacing="0" cellpadding="0" width="150" align="left">
+                    <tr height="5">
+                      <td class="PaddingUsual1" valign="top" align="left">Ник:</td>
+                    </tr>
+                    <tr>  
+                      <td class="PaddingUsual1" valign="top" align="left" ><input type="text" name="Post_Nick1" size="10" maxlength="15" style="background-color:#CCC; color:black" /></td>
+                    </tr>
+                    
+                    <tr>
+                      <td class="PaddingUsual1" valign="top" align="left">Пароль:</td>
+                    </tr>
+                    <tr>  
+                      <td class="PaddingUsual1" valign="top" align="left" ><input type="text" name="Post_Pass1" size="10" maxlength="25" style="background-color:#CCC; color:black" /></td>
+                    </tr>
+                    <tr height="10"><td></td></tr>
+                    <tr>  
+                      <td class="PaddingUsual1" valign="top" align="left" ><input type="submit" value="Залогиниться" style="background-color:#CCC; color:black" /></td>
+                    </tr>
+            </table>
         </form>
        <!--        
         <form action="@{/people/login}" method="POST">
