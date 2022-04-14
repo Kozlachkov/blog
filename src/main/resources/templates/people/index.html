@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>All people</title>
-    <link href="../../css/StyleCSS.css" th:href="@{css/StyleCSS.css}" rel="stylesheet" type="text/css" media="all" />
+    <link href="../../static/css/StyleCSS.css" th:href="@{css/StyleCSS.css}" rel="stylesheet" type="text/css" media="all" />
 </head>
 <!-- -->
 <body>
@@ -13,11 +13,9 @@
 <table width="1000px" border="0" align="center" cellpadding="0" cellspacing="0" >
   <tr height="40px" >
     <td width="400px" class="TextName" align="center">Blogs</td>
-    <td> <img src="../../images/heading.jpg" th:src="@{images/heading.jpg}" width="624px"  height="40" /></td>
+    <td> <img src="../../static/images/heading.jpg" th:src="@{images/heading.jpg}" width="624px"  height="40" /></td>
   </tr>
 </table>
-
-<!-- src="../../images/heading.jpg" -->
 
 <table  width="1000px" border="0" align="center" cellpadding="0" cellspacing="0">  
   <tr height="400px">
@@ -69,22 +67,8 @@
                     </tr>
             </table>
         </form>
-       <!--        
-        <form action="@{/people/login}" method="POST">
-          <ul>
-            <li>
-              <label for="name">Username:</label>
-              <input type="text" id="name" name="username">
-            </li>
-            <li>
-              <label for="pass">Password:</label>
-              <input type="password" id="pass" name="password">
-            </li>
-            <li>
-              <input type="submit" value="Sign In"/>
-            </li>
-          </ul>
-        </form> -->
+		</br>
+        <a href="/people/registration">Зарегистрироваться</a>
     </td>
   </tr>
 </table>

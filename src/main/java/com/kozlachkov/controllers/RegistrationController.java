@@ -1,9 +1,9 @@
 package com.kozlachkov.controllers;
-/*
+
 import com.kozlachkov.models.Person;
 import com.kozlachkov.models.Roles;
 import com.kozlachkov.models.UserDB;
-import com.kozlachkov.repos.UserRepo;
+//import com.kozlachkov.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -20,9 +20,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("/people")
 public class RegistrationController {
-
+/*
     @Autowired
-    private UserRepo userRepo;
+    private UserRepo userRepo;*/
 
     @GetMapping("/registration")
     public String loginPage() {
@@ -31,7 +31,7 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(UserDB userDB, Map<String, Object> model) {
-        UserDB userFromDB = userRepo.fingByUsername(userDB.getUsername());
+        /*UserDB userFromDB = userRepo.fingByUsername(userDB.getUsername());
         if (userFromDB!=null){
             model.put("message", "user exists");
             return ("/people/registration");
@@ -40,8 +40,8 @@ public class RegistrationController {
 
         userDB.setActive(true);
         userDB.setRoles(Collections.singleton(Roles.USER));//Коллекция с одним значением, т.к. в ENUM одно
-        userRepo.save(userDB);
-        return "redirect:/people/login";
+        userRepo.save(userDB);*/
+        return "redirect:/people";
     }
 
-}*/
+}
