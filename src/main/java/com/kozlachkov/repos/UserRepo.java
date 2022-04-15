@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 public interface UserRepo extends JpaRepository<UserDB, Long> {
-
+    //https://spring-projects.ru/guides/tutorials-bookmarks/
     //метод который возвращает пользователя
-    public UserDB fingByUsername (String username);
+    public UserDB findByUsername (String username);
 }
 */

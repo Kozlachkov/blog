@@ -1,6 +1,7 @@
 package com.kozlachkov.dao;
 
 import com.kozlachkov.models.Person;
+import com.kozlachkov.models.UserDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import java.util.List;
 @Component
 public class PersonDao {
     private JdbcTemplate jdbcTemplate;
+    private  static int usr_count = 0;
 
     @Autowired
     public PersonDao(JdbcTemplate jdbcTemplate) {
@@ -23,6 +25,12 @@ public class PersonDao {
 
     public List<Person> index (){
         return jdbcTemplate.query("SELECT* FROM person", new PersonMapper());
+    }
+
+    public void createUser (UserDB userDB){
+        jdbcTemplate.update("INSERT INTO usr VALUE(usr_count,?,?,true)",
+                userDB.getUsername(), userDB.getPassword());
+        usr_count = usr_count+1;
     }
 
     public Person show (int id){

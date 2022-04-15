@@ -3,12 +3,78 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Новый чел</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Данные пользователя</title>
+    <link href="../../static/css/StyleCSS.css" th:href="@{/css/StyleCSS.css}" rel="stylesheet" type="text/css" media="all" />
+
 </head>
 
 <body>
+    <table width="1000px" border="0" align="center" cellpadding="0" cellspacing="0" >
+      <tr height="40px" >
+        <td width="400px" class="TextName" align="center">Данные пользователя</td>
+        <td> <img src="../../static/images/heading.jpg" th:src="@{/images/heading.jpg}" width="624px"  height="40" /></td>
+      </tr>
+    </table>
 
+ <table  width="1000px" border="0" align="center" cellpadding="0" cellspacing="0">  
+  <tr height="400px">
+    <td width="170px" class="RightBorder1" align="center" valign="top">
+      <div class=" TextGeorgia">
+			левая колонка            
+      </div>   
+    </td>
+    <td class="PaddingUsual1" align="left" valign="top"> 
+    <br/>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        Add new user </br>
+        {{#message}} <!--Если есть поле message, а оно есть всегда, мы его показываем -->
+            {{message}}
+        {{/message}}
+    
+		<table border="0" cellspacing="0" cellpadding="0" width="650" align="left">
+           <tr>
+           <td width="310">
+           	Данные пользователя:
+           	<form action="@{/people}" method="POST" th:object="${userDB}">
+                <table border="0" cellspacing="0" cellpadding="0" width="300" align="left">
+                        <tr>
+                          <td width="110" class="PaddingUsual1" valign="top" align="left">Ваше имя:</td>
+                          <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="username" size="10" maxlength="25" style="background-color:#CCC; color:black" th:field="*{name}" /></td>
+                        </tr>                   
+                        <tr>
+                          <td class="PaddingUsual1" valign="top" align="left">Ваш возраст:</td>
+                          <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="userage" size="10" maxlength="25" style="background-color:#CCC; color:black" th:field="*{age}" /></td>
+                        </tr>
+                        <tr>
+                          <td class="PaddingUsual1" valign="top" align="left">Ваш email:</td>
+                          <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="useremail" size="10" maxlength="25" style="background-color:#CCC; color:black" th:field="*{email}" /></td>
+                        </tr>
+                        <tr>  
+                          <td class="PaddingUsual1" valign="top" align="left" ><input type="submit" value="Внести" style="background-color:#CCC; color:black" /></td>
+                          <td> </td>
+                        </tr>
+                </table>
+            </form>
+           </td>
+           <td>
+           		Данные для <span th:text="${userDB.getUsername()}"></span>
+           </td>
+           </tr> 
+         </table>   
+
+    </td>
+    <td width="170px" class="LeftBorder1" align="center" valign="top">
+    </td>
+  </tr>
+ </table>
+
+<!--
 <form th:method="POST" th:action="@{/people}" th:object="${person}">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name"/>
@@ -24,7 +90,7 @@
     <br/>
     <input type="submit" value="Create!"/>
 </form>
-
+-->
 
 </body>
 
