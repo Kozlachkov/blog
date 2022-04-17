@@ -36,23 +36,26 @@
         {{#message}} <!--Если есть поле message, а оно есть всегда, мы его показываем -->
             {{message}}
         {{/message}}
-    
+
 		<table border="0" cellspacing="0" cellpadding="0" width="650" align="left">
            <tr>
            <td width="310">
            	Данные пользователя:
-           	<form action="@{/people}" method="POST" th:object="${userDB}">
+           	<form th:action="@{/people}" th:method="POST" th:object="${person}">
                 <table border="0" cellspacing="0" cellpadding="0" width="300" align="left">
                         <tr>
-                          <td width="110" class="PaddingUsual1" valign="top" align="left">Ваше имя:</td>
+                          <td width="110" class="PaddingUsual1" valign="top" align="left">Ваше имя:
+                              <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div> </td>
                           <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="username" size="10" maxlength="25" style="background-color:#CCC; color:black" th:field="*{name}" /></td>
-                        </tr>                   
+                        </tr>
                         <tr>
-                          <td class="PaddingUsual1" valign="top" align="left">Ваш возраст:</td>
+                          <td class="PaddingUsual1" valign="top" align="left">Ваш возраст:
+                              <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</div> </td>
                           <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="userage" size="10" maxlength="25" style="background-color:#CCC; color:black" th:field="*{age}" /></td>
                         </tr>
                         <tr>
-                          <td class="PaddingUsual1" valign="top" align="left">Ваш email:</td>
+                          <td class="PaddingUsual1" valign="top" align="left">Ваш email:
+                              <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div></td>
                           <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="useremail" size="10" maxlength="25" style="background-color:#CCC; color:black" th:field="*{email}" /></td>
                         </tr>
                         <tr>  
@@ -63,7 +66,7 @@
             </form>
            </td>
            <td>
-           		Данные для <span th:text="${userDB.getUsername()}"></span>
+           		<!-- Данные для <span th:text="${userDB.getUsername()}"></span>  -->
            </td>
            </tr> 
          </table>   

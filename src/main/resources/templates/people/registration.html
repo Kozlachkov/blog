@@ -40,7 +40,7 @@
            <tr>
            <td width="310">
            	Форма регистрации:
-            <form action="@{/people/new}" method="POST" th:object="${userDB}">
+            <form th:action="@{/people/new}" th:method="POST" th:object="${userDB}">
                 <table border="0" cellspacing="0" cellpadding="0" width="300" align="left">
                         <tr>
                           <td width="130" class="PaddingUsual1" valign="top" align="left"><label for="username">Выберите Ник: </label></td>

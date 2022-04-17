@@ -34,22 +34,6 @@ public class MainControllers {
         return ("people/show");
     }
 
-    @GetMapping("/new")
-    public String newPerson(Model model) {
-        model.addAttribute("person", new Person());
-        return "people/new";
-    }
-
-    @PostMapping()
-    public String create(@ModelAttribute("person") @Valid Person person,
-                         BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "people/new";
-
-        personDao.save(person);
-        return "redirect:/people";
-    }
-
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("person", personDao.show(id));

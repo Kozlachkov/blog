@@ -7,7 +7,7 @@ import java.util.Set;
 public class UserDB {
     /*@Id
     @GeneratedValue (strategy = GenerationType.AUTO)*/
-    private Long id;
+    private int id;
     private String username;
     private String password;
     private String check_pass;
@@ -19,8 +19,8 @@ public class UserDB {
     @Enumerated(EnumType.STRING)
     private Set<Roles> roles;
 */
-    public Long getId() { return id;    }
-    public void setId(Long id) {  this.id = id;    }
+    public int getId() { return id;    }
+    public void setId(int id) {  this.id = id;    }
     public String getUsername() { return username;    }
     public void setUsername(String username) { this.username = username;    }
     public String getPassword() { return password;    }
