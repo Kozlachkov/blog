@@ -14,23 +14,42 @@ import java.util.List;
 @Component
 public class PersonDao {
     private JdbcTemplate jdbcTemplate;
-    private  static int usr_count = 0;
+    //private  static int usr_count = 0;
+
+    public static Statement statement;
+    public static Connection connection;
+
 
     @Autowired
     public PersonDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public static Statement statement;
-
     public List<Person> index (){
         return jdbcTemplate.query("SELECT* FROM person", new PersonMapper());
     }
 
     public void createUser (UserDB userDB){
+        int id1;
+        if(getMaxIdFromUsr()==null){
+            id1=0;
+        }
+        else {
+            id1=getMaxIdFromUsr().getId();
+        }
         jdbcTemplate.update("INSERT INTO usr VALUE(?,?,?,?,?)",
-                usr_count, userDB.getUsername(), userDB.getPassword(), userDB.getCheck_pass(), true);
-        usr_count = usr_count+1;
+                id1, userDB.getUsername(), userDB.getPassword(), userDB.getCheck_pass(), true);
+
+    }
+
+    public UserDB getMaxIdFromUsr (){
+        return jdbcTemplate.query("SELECT MAX(`id`) FROM usr", new UsrMapper())
+                .stream().findFirst().orElse(null);
+    }
+
+    public UserDB getUsrByName (String name){
+        return jdbcTemplate.query("SELECT* FROM usr WHERE username=?", new Object[]{name}, new UsrMapper())
+                .stream().findAny().orElse(null);
     }
 
     public Person show (int id){

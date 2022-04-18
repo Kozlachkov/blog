@@ -44,7 +44,11 @@ public class RegistrationController {
         if (bindingResult.hasErrors())
             return "people/registration";
         if (!userDB.getPassword().equals(userDB.getCheck_pass())) {
-            model.put("message", "Pass-check different from the password");
+            model.put("message", "Повторный пароль не совпадает с оригиналом");
+            return "people/registration";
+        }
+        if (personDao.getUsrByName(userDB.getUsername())!=null){
+            model.put("message", "Юзер с таким ником уже существует");
             return "people/registration";
         }
         personDao.createUser(userDB);
