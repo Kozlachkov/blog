@@ -31,19 +31,16 @@ public class PersonDao {
 
     public void createUser (UserDB userDB){
         int id1;
-        if(getMaxIdFromUsr()==null){
-            id1=0;
-        }
-        else {
-            id1=getMaxIdFromUsr().getId();
-        }
+        UserDB userDB1 = getMaxIdFromUsr();
+        if(userDB1==null) id1=0;
+        else id1=userDB1.getId();
         jdbcTemplate.update("INSERT INTO usr VALUE(?,?,?,?,?)",
-                id1, userDB.getUsername(), userDB.getPassword(), userDB.getCheck_pass(), true);
+                ++id1, userDB.getUsername(), userDB.getPassword(), userDB.getCheck_pass(), true);
 
     }
 
     public UserDB getMaxIdFromUsr (){
-        return jdbcTemplate.query("SELECT MAX(`id`) FROM usr", new UsrMapper())
+        return jdbcTemplate.query("SELECT * FROM usr WHERE id = ( SELECT MAX(id) FROM usr )", new UsrMapper())
                 .stream().findFirst().orElse(null);
     }
 
