@@ -1,15 +1,23 @@
 package com.kozlachkov.models;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
-/*@Table(name= "usr")
-@Entity */
+/*@Table(name= "usr")*/
+//@Entity
 public class UserDB {
     /*@Id
     @GeneratedValue (strategy = GenerationType.AUTO)*/
     private int id;
+    @NotEmpty(message = "name should not be empty")
+    @Size(min = 2, max=15, message = "not less 2 and not more 15 symbols")
     private String username;
+    @NotEmpty(message = "name should not be empty")
+    @Size(min = 2, max=25, message = "not less 2 and not more 25 symbols")
     private String password;
+    @NotEmpty(message = "name should not be empty")
+    @Size(min = 2, max=25, message = "not less 2 and not more 25 symbols")
     private String check_pass;
     private boolean active;
 /*

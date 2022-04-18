@@ -28,8 +28,8 @@ public class PersonDao {
     }
 
     public void createUser (UserDB userDB){
-        jdbcTemplate.update("INSERT INTO usr VALUE(usr_count,?,?,?,true)",
-                userDB.getUsername(), userDB.getPassword(), userDB.getCheck_pass());
+        jdbcTemplate.update("INSERT INTO usr VALUE(?,?,?,?,?)",
+                usr_count, userDB.getUsername(), userDB.getPassword(), userDB.getCheck_pass(), true);
         usr_count = usr_count+1;
     }
 

@@ -26,6 +26,8 @@ public class RegistrationController {
     public RegistrationController(PersonDao personDao) {
         this.personDao = personDao;
     }
+
+    private UserDB currentUser;
 /*
     @Autowired
     private UserRepo userRepo;*/
@@ -37,8 +39,17 @@ public class RegistrationController {
     }
 
     @PostMapping("/new")
-    public String create(@ModelAttribute("userDB") UserDB userDB) {
-        //personDao.save(person);
+    public String create(@ModelAttribute("userDB") @Valid UserDB userDB, BindingResult bindingResult,
+                         Map<String, Object> model, Model model2) {
+        if (bindingResult.hasErrors())
+            return "people/registration";
+        if (!userDB.getPassword().equals(userDB.getCheck_pass())) {
+            model.put("message", "Pass-check different from the password");
+            return "people/registration";
+        }
+        personDao.createUser(userDB);
+
+        currentUser = userDB;
         return "redirect:/people/new";
     }
 
@@ -50,9 +61,6 @@ public class RegistrationController {
             return ("/people/registration");
             //если пользователь существует, сообщаем об этом
         }*/
-        //System.out.println("user should be created");
-        //personDao.createUser(userDB);
-        //model.addAttribute("userDB", userDB);
         /*
         userDB.setActive(true);
         userDB.setRoles(Collections.singleton(Roles.USER));//Коллекция с одним значением, т.к. в ENUM одно
@@ -61,12 +69,10 @@ public class RegistrationController {
     //}
 
     @GetMapping("/new")
-    public String newPerson(Model model/*@ModelAttribute("userDB") UserDB userDB, ModelMap mapl*/) {
-        model.addAttribute("person", new Person());
-        /*Person person = new Person();
-        person.setId(userDB.getId());
-        mapl.addAttribute("person", person);
-        mapl.addAttribute("userDB", userDB);*/
+    public String newPerson(Model model) {
+        Person person = new Person();
+        person.setId(currentUser.getId());
+        model.addAttribute("person", person);
         return "people/new";
     }
 
