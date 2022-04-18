@@ -1,6 +1,7 @@
 package com.kozlachkov.dao;
 
 import com.kozlachkov.models.Person;
+import com.kozlachkov.models.Roles;
 import com.kozlachkov.models.UserDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,8 +35,8 @@ public class PersonDao {
         UserDB userDB1 = getMaxIdFromUsr();
         if(userDB1==null) id1=0;
         else id1=userDB1.getId();
-        jdbcTemplate.update("INSERT INTO usr VALUE(?,?,?,?,?)",
-                ++id1, userDB.getUsername(), userDB.getPassword(), userDB.getCheck_pass(), true);
+        jdbcTemplate.update("INSERT INTO usr VALUE(?,?,?,?,?,?)",
+                ++id1, userDB.getUsername(), userDB.getPassword(), userDB.getCheck_pass(), Roles.USER, true);
 
     }
 
