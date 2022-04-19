@@ -19,7 +19,7 @@ public class UserDB {
     @NotEmpty(message = "name should not be empty")
     @Size(min = 2, max=25, message = "not less 2 and not more 25 symbols")
     private String check_pass;
-    private String role;
+    private Roles role;
     private boolean active;
 /*
     @ElementCollection (targetClass = Roles.class, fetch= FetchType.EAGER )
@@ -40,7 +40,7 @@ public class UserDB {
     public void setRoles(Set<Roles> roles) {   this.roles = roles;    }*/
     public String getCheck_pass() {  return check_pass;   }
     public void setCheck_pass(String check_pass) {  this.check_pass = check_pass; }
-    public String getRole() {  return role; }
-    public void setRole(String role) {   this.role = role;  }
+    public Roles getRole() {  return role; }
+    public void setRole(Roles role) {   this.role = role;  }
 
 }

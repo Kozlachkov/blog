@@ -1,6 +1,7 @@
 package com.kozlachkov.dao;
 
 import com.kozlachkov.models.Person;
+import com.kozlachkov.models.Roles;
 import com.kozlachkov.models.UserDB;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -15,7 +16,8 @@ public class UsrMapper implements RowMapper<UserDB> {
         userDB.setUsername(resultSet.getString("username"));
         userDB.setPassword(resultSet.getString("password"));
         userDB.setCheck_pass(resultSet.getString("check_pass"));
-        userDB.setActive(true);
+        userDB.setRole(Roles.valueOf(resultSet.getString("role")));
+        userDB.setActive(resultSet.getBoolean("active"));
         return userDB;
     }
 }

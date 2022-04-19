@@ -33,9 +33,7 @@
             You have been logged out.
         </div>
         Add new user </br>
-        {{#message}} <!--Если есть поле message, а оно есть всегда, мы его показываем -->
-            {{message}}
-        {{/message}}
+
 
 		<table border="0" cellspacing="0" cellpadding="0" width="650" align="left">
            <tr>
@@ -66,6 +64,8 @@
             </form>
            </td>
            <td>
+               Здесь вы должны ввести данные для зарегистированного пользователя: </br>
+               <div style="color:blue" th:text="${message1}"></div>
            		<!-- Данные для <span th:text="${userDB.getUsername()}"></span>  -->
            </td>
            </tr> 

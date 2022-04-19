@@ -40,9 +40,6 @@
             You have been logged out.
         </div>
         Add new user </br>
-        {{#message}} <!--Если есть поле message, а оно есть всегда, мы его показываем -->
-            {{message}}
-        {{/message}}
         <div style="color:red" th:text="${message}"></div>
 
         <table border="0" cellspacing="0" cellpadding="0" width="650" align="left">
@@ -78,7 +75,7 @@
            </td>
            <td width="30"> </td>
            <td align="center">
-           		После регистрации введите ваши данные: Имя, возраст и email
+           		После регистрации нужно будет ввести дополнительные данные: Имя, возраст и email
            </td>
            </tr> 
          </table>   

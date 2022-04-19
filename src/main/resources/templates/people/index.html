@@ -26,14 +26,19 @@
     </td>
 	<td class="PaddingUsual1" align="left" valign="top"> 
     <br/>
-    	Основная колонка
+    	Зарегистрированные пользователи:
 
         <div th:each="person : ${people}">
             <a th:href="@{/people/{id}(id=${person.getId()})}"
-               th:text="${person.getName()} + ', ' + ${person.getAge()}">user</a>
+               th:text="${person.getName()}">user</a>
+            <!-- th:text="${person.getName()} + ', ' + ${person.getAge()}" -->
         </div>
         </br>
          <a href="/people/new">Add new one</a>
+
+        </br></br></br>
+        Активен пользователь: </br>
+        <div style="color:blue" th:text="${message3}"></div>
 
 	</td>
     <td width="170px" class="LeftBorder1" align="center" valign="top">

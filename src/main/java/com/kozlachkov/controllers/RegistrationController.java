@@ -32,6 +32,14 @@ public class RegistrationController {
     @Autowired
     private UserRepo userRepo;*/
 
+    @GetMapping()
+    public  String index(Model model, Map<String, Object> message3){
+        model.addAttribute("people", personDao.index());
+        if (currentUser!=null)  message3.put("message3", currentUser.getUsername());
+        else message3.put("message3", "нет залогиненного пользователя");
+        return ("people/index");
+    }
+
     @GetMapping("/registration")
     public String loginPage(Model model) {
         model.addAttribute("userDB", new UserDB());
@@ -51,9 +59,8 @@ public class RegistrationController {
             model.put("message", "Юзер с таким ником уже существует");
             return "people/registration";
         }
-        personDao.createUser(userDB);
+        currentUser = personDao.createUser(userDB);
 
-        currentUser = userDB;
         return "redirect:/people/new";
     }
 
@@ -73,10 +80,11 @@ public class RegistrationController {
     //}
 
     @GetMapping("/new")
-    public String newPerson(Model model) {
+    public String newPerson(Model model, Map<String, Object> message1) {
         Person person = new Person();
         person.setId(currentUser.getId());
         model.addAttribute("person", person);
+        message1.put("message1", currentUser.getUsername());
         return "people/new";
     }
 
@@ -86,7 +94,7 @@ public class RegistrationController {
         if (bindingResult.hasErrors())
             return "people/new";
 
-        personDao.save(person);
+        personDao.save(person, currentUser);
         return "redirect:/people";
     }
 

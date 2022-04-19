@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/people")
@@ -20,23 +21,18 @@ public class MainControllers {
         this.personDao = personDao;
     }
 
-    @GetMapping() //выше есть "/people"
-    public  String index(Model model){
-        //получим всех людей из ДАО и отправим их в отображение.
-        model.addAttribute("people", personDao.index());
-        return ("people/index"); //папка где лежит
-    }
+
 
     @GetMapping("/{id}") //id из переданных парам-в (продолжение адреса) передастся в метод
     public String show (@PathVariable ("id") int id, Model model){ //id - обрати внимание, целое число
         //получим одного человека из ДАО и передадим его на отображение
-        model.addAttribute("person", personDao.show(id));
+        model.addAttribute("person", personDao.getPersonById(id));
         return ("people/show");
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("person", personDao.show(id));
+        model.addAttribute("person", personDao.getPersonById(id));
         return "people/edit";
     }
 
