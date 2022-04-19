@@ -34,6 +34,9 @@ public class RegistrationController {
 
     @GetMapping()
     public  String index(Model model, Map<String, Object> message3){
+        if (currentUser!=null && !personDao.PersonIsActive(currentUser)){
+            return "redirect:new";
+        }
         model.addAttribute("people", personDao.index());
         if (currentUser!=null)  message3.put("message3", currentUser.getUsername());
         else message3.put("message3", "нет залогиненного пользователя");
@@ -95,6 +98,13 @@ public class RegistrationController {
             return "people/new";
 
         personDao.save(person, currentUser);
+        return "redirect:/people";
+    }
+
+    @GetMapping("/removeNik")
+    public String deleteNik (){
+        personDao.deleteRegisteredNik(currentUser.getId());
+        currentUser = null;
         return "redirect:/people";
     }
 

@@ -54,6 +54,19 @@ public class PersonDao {
                 .stream().findAny().orElse(null);
     }
 
+    public boolean PersonIsActive(UserDB userDB) {
+        Person person;
+        try {
+            person = getPersonById(userDB.getId());
+        }
+        catch (Exception e) {
+            return false;
+        }
+        if (person==null) return false;
+        if (person.isAvtive()) return  true;
+        else return false;
+    }
+
     public void save(Person person, UserDB userDB){
          jdbcTemplate.update("INSERT INTO person VALUE(?,?,?,?,?)",
                  userDB.getId(), person.getName(), person.getAge(), person.getEmail(), true);
@@ -66,5 +79,9 @@ public class PersonDao {
 
     public void delete (int id){
         jdbcTemplate.update("DELETE FROM person WHERE id=?", id);
+    }
+
+    public void deleteRegisteredNik (int id){
+        jdbcTemplate.update("DELETE FROM usr WHERE id=?", id);
     }
 }

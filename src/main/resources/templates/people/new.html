@@ -66,6 +66,8 @@
            <td>
                Здесь вы должны ввести данные для зарегистированного пользователя: </br>
                <div style="color:blue" th:text="${message1}"></div>
+               Если не хотите продолжать регистрацию, нажмите:
+               <a style="color:red" th:href="@{/people/removeNik}"> удалить зарегестрированный ник.</a>
            		<!-- Данные для <span th:text="${userDB.getUsername()}"></span>  -->
            </td>
            </tr> 

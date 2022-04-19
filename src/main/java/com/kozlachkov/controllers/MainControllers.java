@@ -22,7 +22,6 @@ public class MainControllers {
     }
 
 
-
     @GetMapping("/{id}") //id из переданных парам-в (продолжение адреса) передастся в метод
     public String show (@PathVariable ("id") int id, Model model){ //id - обрати внимание, целое число
         //получим одного человека из ДАО и передадим его на отображение
