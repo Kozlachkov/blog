@@ -33,11 +33,12 @@ public class RegistrationController {
     private UserRepo userRepo;*/
 
     @GetMapping()
-    public  String index(Model model, Map<String, Object> message3){
+    public  String index(ModelMap modelMap, Map<String, Object> message3){
         if (currentUser!=null && !personDao.PersonIsActive(currentUser)){
             return "redirect:new";
         }
-        model.addAttribute("people", personDao.index());
+        modelMap.addAttribute("people", personDao.index());
+        modelMap.addAttribute("usersDB", personDao.indexUserDB());
         if (currentUser!=null)  message3.put("message3", currentUser.getUsername());
         else message3.put("message3", "нет залогиненного пользователя");
         return ("people/index");
@@ -49,8 +50,8 @@ public class RegistrationController {
         return "people/registration";
     }
 
-    @PostMapping("/new")
-    public String create(@ModelAttribute("userDB") @Valid UserDB userDB, BindingResult bindingResult,
+    @PostMapping("/new")  //Постим в БД Ник, переходим к вводу данных: имя, мыло..
+    public String createNik(@ModelAttribute("userDB") @Valid UserDB userDB, BindingResult bindingResult,
                          Map<String, Object> model, Model model2) {
         if (bindingResult.hasErrors())
             return "people/registration";
@@ -83,7 +84,7 @@ public class RegistrationController {
     //}
 
     @GetMapping("/new")
-    public String newPerson(Model model, Map<String, Object> message1) {
+    public String createNewPerson(Model model, Map<String, Object> message1) {
         Person person = new Person();
         person.setId(currentUser.getId());
         model.addAttribute("person", person);
@@ -92,7 +93,7 @@ public class RegistrationController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("person") @Valid Person person,
+    public String createNewPerson(@ModelAttribute("person") @Valid Person person,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "people/new";

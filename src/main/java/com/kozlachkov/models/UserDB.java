@@ -21,13 +21,25 @@ public class UserDB {
     private String check_pass;
     private Roles role;
     private boolean active;
-/*
-    @ElementCollection (targetClass = Roles.class, fetch= FetchType.EAGER )
-    @CollectionTable (name = "user_roles", joinColumns = @JoinColumn(name="user_id"))
-    //говорит, что Сет будет храниться в таблице, для которого мы не описывали Mapping
-    @Enumerated(EnumType.STRING)
-    private Set<Roles> roles;
-*/
+
+    public UserDB (){}
+
+    public UserDB(int id, String username, String password, String check_pass, Roles role, boolean active) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.check_pass = check_pass;
+        this.role = role;
+        this.active = active;
+    }
+
+    /*
+        @ElementCollection (targetClass = Roles.class, fetch= FetchType.EAGER )
+        @CollectionTable (name = "user_roles", joinColumns = @JoinColumn(name="user_id"))
+        //говорит, что Сет будет храниться в таблице, для которого мы не описывали Mapping
+        @Enumerated(EnumType.STRING)
+        private Set<Roles> roles;
+    */
     public int getId() { return id;    }
     public void setId(int id) {  this.id = id;    }
     public String getUsername() { return username;    }

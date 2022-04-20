@@ -25,6 +25,10 @@ public class PersonDao {
         return jdbcTemplate.query("SELECT* FROM person", new PersonMapper());
     }
 
+    public List<UserDB> indexUserDB (){
+        return jdbcTemplate.query("SELECT* FROM usr", new UsrMapper());
+    }
+
     public UserDB createUser (UserDB userDB){
         int id1;
         UserDB userDB1 = getMaxIdFromUsr();

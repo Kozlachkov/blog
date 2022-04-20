@@ -29,9 +29,9 @@
     	Зарегистрированные пользователи:
 
         <div th:each="person : ${people}">
-            <a th:href="@{/people/{id}(id=${person.getId()})}"
-               th:text="${person.getName()}">user</a>
-            <!-- th:text="${person.getName()} + ', ' + ${person.getAge()}" -->
+            <a 	th:with="id1=${person.getId()}, nik=${usersDB.get(id1)}"
+                th:href="@{/people/{id}(id=${person.getId()})}"
+                th:text="${person.getName()} + ' (c Ником: ' +${nik.getUsername()} + ') ' ">user</a>
         </div>
         </br>
 

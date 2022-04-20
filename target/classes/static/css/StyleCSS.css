@@ -22,6 +22,7 @@ img {border:0;}
  .ArticleDate2:hover {cursor:pointer;}
  .TextGeorgia {font-family:Georgia, "Times New Roman", Times, serif; margin:8px;}
  .TextName {font-size:24px; line-height:30px; padding-left:60px; font-weight:bold; font-family:Georgia, "Times New Roman", Times, serif;}
+ .TextName2 {font-size:22px; line-height:24px; padding-left:60px; font-weight:bold; font-family:Georgia, "Times New Roman", Times, serif;}
  .TextHonor {color:#900; line-height:30px; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-size:17px; vertical-align:top;}
  .TextHonor2 {color:#900; line-height:20px; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-size:17px; vertical-align:top;}
  .MarginZero {margin:0; padding:0;}
