@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Blog</title>
+    <link href="../../static/css/StyleCSS.css" th:href="@{/css/StyleCSS.css}" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+<body>
+    <table width="1000px" border="0" align="center" cellpadding="0" cellspacing="0" >
+      <tr height="40px" >
+        <td width="400px" class="TextName2" align="center">User's Page 
+         	<span style="color:blue" th:text="${userDB.getUsername()}"> </span>
+        </td>
+        <td> <img src="../../static/images/heading.jpg" th:src="@{/images/heading.jpg}" width="624px"  height="40" /></td>
+      </tr>
+    </table>
+ <table  width="1000px" border="0" align="center" cellpadding="0" cellspacing="0">  
+  <tr height="400px">
+    <td width="170px" class="RightBorder1" align="center" valign="top">
+      <div class=" TextGeorgia">
+			Contacts:</br>
+             <p th:text="${person.getEmail}">EmailValue</p>            
+      </div>   
+    </td>
+    <td class="PaddingUsual1" align="left" valign="top"> 
+    <br/>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        </br>
+        <div style="color:red" th:text="${message}"></div>
+
+        <table border="0" cellspacing="0" cellpadding="0" width="650" align="left">
+           <tr>
+           <td width="310">
+
+              
+                
+                <div>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+                </div>
+                
+           </td>
+           </tr> 
+         </table>   
+
+
+    </td>
+    <td width="170px" class="LeftBorder1" align="center" valign="top">
+    	</br></br>
+        <form th:method="GET" th:action="@{/people/{id}/createPost(id=${person.getId()})}">
+            <input type="submit" value="Создать пост"/>
+        </form>
+        </br></br>
+        <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit user's data</a>
+                </br></br></br>
+                
+         <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+             <input type="submit" value="Remove user"/>
+         </form>
+              
+    </td>
+  </tr>
+ </table>
+
+
+
+</body>
+
+</html>
