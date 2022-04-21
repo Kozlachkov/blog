@@ -26,7 +26,7 @@
     </td>
 	<td class="PaddingUsual1" align="left" valign="top"> 
     <br/>
-    	Зарегистрированные пользователи:
+    	Registered users:
 
         <div th:each="person : ${people}">
             <a 	th:with="id1=${person.getId()}, nik=${usersDB.get(id1)}"
@@ -37,7 +37,7 @@
 
 
         </br></br></br>
-        Активен пользователь: </br>
+        Activated user: </br>
         <div style="color:blue" th:text="${message3}"></div>
 
 	</td>
@@ -54,26 +54,26 @@
          <form action="@{/people/login}" method="POST">
           	<table border="0" cellspacing="0" cellpadding="0" width="150" align="left">
                     <tr height="5">
-                      <td class="PaddingUsual1" valign="top" align="left">Ник:</td>
+                      <td class="PaddingUsual1" valign="top" align="left">Nikname:</td>
                     </tr>
                     <tr>  
                       <td class="PaddingUsual1" valign="top" align="left" ><input type="text" name="Post_Nick1" size="10" maxlength="15" style="background-color:#CCC; color:black" /></td>
                     </tr>
                     
                     <tr>
-                      <td class="PaddingUsual1" valign="top" align="left">Пароль:</td>
+                      <td class="PaddingUsual1" valign="top" align="left">Password:</td>
                     </tr>
                     <tr>  
                       <td class="PaddingUsual1" valign="top" align="left" ><input type="text" name="Post_Pass1" size="10" maxlength="25" style="background-color:#CCC; color:black" /></td>
                     </tr>
                     <tr height="10"><td></td></tr>
                     <tr>  
-                      <td class="PaddingUsual1" valign="top" align="left" ><input type="submit" value="Залогиниться" style="background-color:#CCC; color:black" /></td>
+                      <td class="PaddingUsual1" valign="top" align="left" ><input type="submit" value="Login" style="background-color:#CCC; color:black" /></td>
                     </tr>
             </table>
         </form>
-		</br>
-        <a href="/people/registration">Зарегистрироваться</a>
+		</br></br></br>
+        <a href="/people/registration">Create new user</a>
     </td>
   </tr>
 </table>

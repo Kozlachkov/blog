@@ -11,7 +11,7 @@
 <body>
     <table width="1000px" border="0" align="center" cellpadding="0" cellspacing="0" >
       <tr height="40px" >
-        <td width="400px" class="TextName2" align="center">Создание поста пользователемa
+        <td width="400px" class="TextName2" align="center">Creating a post
         	<span style="color:blue" th:text="${userDB.getUsername()}"> </span>
         </td>
         <td> <img src="../../static/images/heading.jpg" th:src="@{/images/heading.jpg}" width="624px"  height="40" /></td>
@@ -21,45 +21,41 @@
   <tr height="400px">
     <td width="170px" class="RightBorder1" align="center" valign="top">
       <div class=" TextGeorgia">
-			левая колонка            
+			            
       </div>   
     </td>
     <td class="PaddingUsual1" align="left" valign="top"> 
     <br/>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        </br>
+         </br>
         <div style="color:red" th:text="${message}"></div>
 
         <table border="0" cellspacing="0" cellpadding="0" width="650" align="left">
            <tr>
            <td width="310">
-           	Создаём пост:</br> <!-- {id}(id=${person.getId()})  -->
-            <form th:action="@{/people/{id}(id=${person.getId()})}" th:method="POST" th:object="${post1}">
+
+           	Creating the post:</br> <!--   th:object="${post1}" -->
+             <form th:action="@{/people/{id}(id=${person.getId()})}" th:method="POST" th:object="${webPost}" >
                 <table border="0" cellspacing="0" cellpadding="0" width="600" align="left">
                         <tr>
-                          <td class="PaddingUsual1" valign="top" align="left">Заголовок:</br>
+                          <td class="PaddingUsual1" valign="top" align="left">Header:</br>
                               <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name Error</div>
                               <input type="text" id="title" size="60" maxlength="100" style="background-color:#CCC; color:black" th:field="*{title}" />
                           </td>
                         </tr>   
-                        <tr>
-                          <td class="PaddingUsual1" valign="top" align="left">Текст поста:</br>
+                       <tr>
+                          <td class="PaddingUsual1" valign="top" align="left">Text for the post:</br>
                               <div style="color:red" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Name Error</div>
-                              <textarea id="text" cols="60" rows="4" style="background-color:#CCC; color:black" th:field="*{text}" />
+                              <!-- <textarea id="text" cols="60" rows="4" style="background-color:#CCC; color:black" th:field="*{text}" /> -->
+                              <input type="text" id="text" size="60" maxlength="100" style="background-color:#CCC; color:black" th:field="*{text}" />
                           </td>
-                        </tr>                
+                        </tr>              
                         <tr>  
                           <td class="PaddingUsual1" valign="top" align="left" >
-                          	<input type="submit" value="Фигачь" style="background-color:#CCC; color:black" />
+                          	<input type="submit" value="Send" style="background-color:#CCC; color:black" />
                           </td>
                         </tr>
                 </table>
-            </form>
+            </form>  
            </td>
            </tr> 
          </table>   

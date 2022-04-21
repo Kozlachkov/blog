@@ -20,7 +20,7 @@
 <body>
     <table width="1000px" border="0" align="center" cellpadding="0" cellspacing="0" >
       <tr height="40px" >
-        <td width="400px" class="TextName" align="center">Форма регистрации</td>
+        <td width="400px" class="TextName" align="center">Registration form</td>
         <td> <img src="../../static/images/heading.jpg" th:src="@{/images/heading.jpg}" width="624px"  height="40" /></td>
       </tr>
     </table>
@@ -28,7 +28,7 @@
   <tr height="400px">
     <td width="170px" class="RightBorder1" align="center" valign="top">
       <div class=" TextGeorgia">
-			левая колонка            
+			left column           
       </div>   
     </td>
     <td class="PaddingUsual1" align="left" valign="top"> 
@@ -45,29 +45,29 @@
         <table border="0" cellspacing="0" cellpadding="0" width="650" align="left">
            <tr>
            <td width="310">
-           	Форма регистрации:
+           	Registration form:
             <form th:action="@{/people/new}" th:method="POST" th:object="${userDB}">
                 <table border="0" cellspacing="0" cellpadding="0" width="300" align="left">
                         <tr>
-                          <td width="130" class="PaddingUsual1" valign="top" align="left">Выберите Ник:
+                          <td width="130" class="PaddingUsual1" valign="top" align="left">Choose the Nikname:
                               <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</div>
                           </td>
                           <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="username" size="10" maxlength="15" style="background-color:#CCC; color:black" th:field="*{username}" /></td>
                         </tr>                   
                         <tr>
-                          <td class="PaddingUsual1" valign="top" align="left">Выберите Пароль:
+                          <td class="PaddingUsual1" valign="top" align="left">Choose the password:
                               <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</div>
                           </td>
                           <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="reg_pass" size="10" maxlength="25" style="background-color:#CCC; color:black" th:field="*{password}" /></td>
                         </tr>
                         <tr>
-                          <td class="PaddingUsual1" valign="top" align="left">Повторите Пароль:
+                          <td class="PaddingUsual1" valign="top" align="left">Repeat the password:
                               <div style="color:red" th:if="${#fields.hasErrors('check_pass')}" th:errors="*{check_pass}">Name Error</div>
                           </td>
                           <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="reg_pass_check" size="10" maxlength="25" style="background-color:#CCC; color:black" th:field="*{check_pass}"/></td>
                         </tr>
                         <tr>  
-                          <td class="PaddingUsual1" valign="top" align="left" ><input type="submit" value="Зарегистироваться" style="background-color:#CCC; color:black" /></td>
+                          <td class="PaddingUsual1" valign="top" align="left" ><input type="submit" value="Create" style="background-color:#CCC; color:black" /></td>
                           <td> </td>
                         </tr>
                 </table>

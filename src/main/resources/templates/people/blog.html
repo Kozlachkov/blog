@@ -4,14 +4,14 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Блог</title>
+    <title>Blog</title>
     <link href="../../static/css/StyleCSS.css" th:href="@{/css/StyleCSS.css}" rel="stylesheet" type="text/css" media="all" />
 </head>
 
 <body>
     <table width="1000px" border="0" align="center" cellpadding="0" cellspacing="0" >
       <tr height="40px" >
-        <td width="400px" class="TextName2" align="center">Страничка пользователя 
+        <td width="400px" class="TextName2" align="center">User's Page 
          	<span style="color:blue" th:text="${userDB.getUsername()}"> </span>
         </td>
         <td> <img src="../../static/images/heading.jpg" th:src="@{/images/heading.jpg}" width="624px"  height="40" /></td>
@@ -21,7 +21,7 @@
   <tr height="400px">
     <td width="170px" class="RightBorder1" align="center" valign="top">
       <div class=" TextGeorgia">
-			контакты:</br>
+			Contacts:</br>
              <p th:text="${person.getEmail}">EmailValue</p>            
       </div>   
     </td>
@@ -60,11 +60,11 @@
             <input type="submit" value="Создать пост"/>
         </form>
         </br></br>
-        <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Редактировать данные пользователя</a>
+        <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit user's data</a>
                 </br></br></br>
                 
          <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
-             <input type="submit" value="Удалить юзера"/>
+             <input type="submit" value="Remove user"/>
          </form>
               
     </td>

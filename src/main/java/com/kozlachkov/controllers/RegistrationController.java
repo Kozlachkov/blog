@@ -5,6 +5,7 @@ import com.kozlachkov.models.Person;
 import com.kozlachkov.models.Roles;
 import com.kozlachkov.models.UserDB;
 //import com.kozlachkov.repos.UserRepo;
+import com.kozlachkov.models.WebPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -109,4 +110,11 @@ public class RegistrationController {
         return "redirect:/people";
     }
 
+    @GetMapping("/test")
+    public String testPage (ModelMap modelMap2){
+        modelMap2.addAttribute("person",new Person());
+        modelMap2.addAttribute("userDB", new UserDB());
+        modelMap2.addAttribute("post1", new WebPost());
+        return "people/test";
+    }
 }

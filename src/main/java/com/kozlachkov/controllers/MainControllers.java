@@ -1,9 +1,7 @@
 package com.kozlachkov.controllers;
 
 import com.kozlachkov.dao.PersonDao;
-import com.kozlachkov.models.Person;
-import com.kozlachkov.models.Post;
-import com.kozlachkov.models.UserDB;
+import com.kozlachkov.models.WebPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/people")
@@ -26,10 +24,11 @@ public class MainControllers {
 
 
     @GetMapping("/{id}") //отображение странички блога конкретного человека
-    public String showBlog (@PathVariable ("id") int id, ModelMap modelMap){ //id - обрати внимание, целое число
+    public String showBlog (@PathVariable ("id") int id, ModelMap modelMap1){ //id - обрати внимание, целое число
         //получим одного человека из ДАО и передадим его на отображение
-        modelMap.addAttribute("person", personDao.getPersonById(id));
-        modelMap.addAttribute("userDB", personDao.getUsrById(id));
+        modelMap1.addAttribute("person", personDao.getPersonById(id));
+        modelMap1.addAttribute("userDB", personDao.getUsrById(id));
+        modelMap1.addAttribute("webPost", new WebPost());
         return ("people/blog");
     }
 
@@ -60,20 +59,21 @@ public class MainControllers {
     }
 
     @GetMapping("/{id}/createPost") //форма написания поста
-    public String createUserPost(ModelMap modelMap, @PathVariable("id") int id) {
-        modelMap.addAttribute("post1", new Post());
+    public String createUserPost(@PathVariable("id") int id, ModelMap modelMap) {
         modelMap.addAttribute("person", personDao.getPersonById(id));
         modelMap.addAttribute("userDB", personDao.getUsrById(id));
+        modelMap.addAttribute("webPost", new WebPost());
         return "people/createPost";
     }
 
     @PostMapping("/{id}") //создаём пост
-    public String postUserPost(@ModelAttribute("post1") @Valid Post post, BindingResult bindingResult,
+    public String postUserPost(@ModelAttribute("webPost") @Valid WebPost webPost, BindingResult bindingResult,
                                @PathVariable("id") int id) {
-       /*modelMap.addAttribute("person", personDao.getPersonById(id));
-        modelMap.addAttribute("userDB", personDao.getUsrById(id));*/
-        //String str1 = "people/${id}";
-        return "people/${id}";
+        if (bindingResult.hasErrors())
+            return "people/{id}/createPost";
+        webPost.setId_note(1);
+        webPost.setData_pub(new Date());
+        return  "redirect:/people/{id}"; //"people/test";
     }
 
 }
