@@ -3,6 +3,7 @@ package com.kozlachkov.dao;
 import com.kozlachkov.models.Person;
 import com.kozlachkov.models.Roles;
 import com.kozlachkov.models.UserDB;
+import com.kozlachkov.models.WebPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,10 @@ public class PersonDao {
 
     public List<UserDB> indexUserDB (){
         return jdbcTemplate.query("SELECT* FROM usr", new UsrMapper());
+    }
+
+    public List<WebPost> getAllPosts (int id){
+        return jdbcTemplate.query("SELECT* FROM blog WHERE id=?", new Object[]{id}, new BlogMapper());
     }
 
     public UserDB createUser (UserDB userDB){

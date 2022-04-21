@@ -34,7 +34,7 @@
            <td width="310">
 
            	Creating the post:</br> <!--   th:object="${post1}" -->
-             <form th:action="@{/people/{id}(id=${person.getId()})}" th:method="POST" th:object="${webPost}" >
+             <form th:action="@{people/{id}(id=${person.getId()})}" th:method="POST" th:object="${webPost}" >
                 <table border="0" cellspacing="0" cellpadding="0" width="600" align="left">
                         <tr>
                           <td class="PaddingUsual1" valign="top" align="left">Header:</br>

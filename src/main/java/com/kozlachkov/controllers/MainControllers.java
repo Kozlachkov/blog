@@ -22,15 +22,21 @@ public class MainControllers {
         this.personDao = personDao;
     }
 
-
     @GetMapping("/{id}") //отображение странички блога конкретного человека
-    public String showBlog (@PathVariable ("id") int id, ModelMap modelMap1){ //id - обрати внимание, целое число
-        //получим одного человека из ДАО и передадим его на отображение
+    public String showBlog (@PathVariable ("id") int id, ModelMap modelMap1){
+        modelMap1.addAttribute("person", personDao.getPersonById(id));
+        modelMap1.addAttribute("userDB", personDao.getUsrById(id));
+        modelMap1.addAttribute("webPost", personDao.getAllPosts(id));
+        return ("people/blog");
+    }
+/*
+    @GetMapping("/{id}") //отображение странички блога конкретного человека
+    public String showBlog (@PathVariable ("id") int id, ModelMap modelMap1){
         modelMap1.addAttribute("person", personDao.getPersonById(id));
         modelMap1.addAttribute("userDB", personDao.getUsrById(id));
         modelMap1.addAttribute("webPost", new WebPost());
         return ("people/blog");
-    }
+    }*/
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
@@ -69,11 +75,13 @@ public class MainControllers {
     @PostMapping("/{id}") //создаём пост
     public String postUserPost(@ModelAttribute("webPost") @Valid WebPost webPost, BindingResult bindingResult,
                                @PathVariable("id") int id) {
+        String str1 = "people/"+id+"/createPost";
         if (bindingResult.hasErrors())
-            return "people/{id}/createPost";
+            return str1;
+        webPost.setId(1);
         webPost.setId_note(1);
         webPost.setData_pub(new Date());
-        return  "redirect:/people/{id}"; //"people/test";
+        return  "redirect:/people/${id}"; //"people/test";
     }
 
 }

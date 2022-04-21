@@ -6,6 +6,7 @@ import java.util.Date;
 
 
 public class WebPost {
+    private int id;
     private int id_note;
     @NotEmpty(message = "Title should not be empty")
     @Max(value = 100, message = "max length = 100 symbols" )
@@ -16,13 +17,16 @@ public class WebPost {
 
     public WebPost(){}
 
-    public WebPost(int id_note, String title, String text, Date data_pub) {
+    public WebPost(int id, int id_note, String title, String text, Date data_pub) {
+        this.id = id;
         this.id_note = id_note;
         this.title = title;
         this.text = text;
         this.data_pub = data_pub;
     }
 
+    public int getId() { return id;  }
+    public void setId(int id_note) { this.id = id;   }
     public int getId_note() { return id_note;  }
     public void setId_note(int id_note) { this.id_note = id_note;   }
     public String getTitle() { return title;    }
