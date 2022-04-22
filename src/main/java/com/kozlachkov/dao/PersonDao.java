@@ -17,6 +17,29 @@ import java.util.List;
 public class PersonDao {
     private JdbcTemplate jdbcTemplate;
 
+
+    public static final String USER_NAME = "roman";
+    public static final String PASSWORD = "DBsurleversant";
+    public static final String URL = "jdbc:mysql://localhost:3306/javastudy";
+    public static Statement statement;
+    public static Connection connection2;
+
+    static{
+        try {Class.forName("com.mysql.cj.jdbc.Driver");   }
+        catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+    }
+    static{
+        try{ connection2=DriverManager.getConnection(URL, USER_NAME, PASSWORD);}
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+
+
     @Autowired
     public PersonDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -31,17 +54,7 @@ public class PersonDao {
     }
 
     public List<WebPost> getAllPosts (int id){
-        try {
-            statement = connection.createStatement();
-            String SQL = "INSERT INTO person VALUE(" + 1 + ",'" + person.getName() +
-                    "'," + person.getAge() + ",'" + person.getEmail() + "')";
-            statement.executeUpdate(SQL);
-        }
-        catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        //return jdbcTemplate.query("SELECT* FROM blog WHERE id=?", new Object[]{id}, new BlogMapper());
+        return jdbcTemplate.query("SELECT* FROM blog WHERE id=?", new Object[]{id}, new BlogMapper());
     }
 
     public UserDB createUser (UserDB userDB){
@@ -117,7 +130,7 @@ public class PersonDao {
     }
 
     public WebPost getMaxNoteFromUsr (int id){
-        return jdbcTemplate.query("SELECT * FROM blog WHERE id_note = ( SELECT MAX(id_note) FROM blog ) AND WHERE id_note=?",
+        return jdbcTemplate.query("SELECT * FROM blog WHERE id_note = ( SELECT MAX(id_note) FROM blog ) AND WHERE id=?",
                 new Object[]{id}, new BlogMapper())
                 .stream().findFirst().orElse(null);
     }

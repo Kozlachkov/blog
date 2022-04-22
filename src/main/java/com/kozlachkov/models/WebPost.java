@@ -18,19 +18,16 @@ public class WebPost {
     private Date data_pub;
 
     public WebPost(){
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
-        formatForDateNow.format(this.data_pub);
+        /*SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
+        formatForDateNow.format(this.data_pub);*/
     }
 
     public WebPost(int id, int id_note, String title, String text, Date data_pub) {
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
-        formatForDateNow.format(this.data_pub);
         this.id = id;
         this.id_note = id_note;
         this.title = title;
         this.text = text;
         this.data_pub =  data_pub;
-        formatForDateNow.format(this.data_pub);
     }
 
     public int getId() { return id;  }
@@ -41,13 +38,7 @@ public class WebPost {
     public void setTitle(String title) {  this.title = title;    }
     public String getText() {return text; }
     public void setText(String text) {  this.text = text;  }
-    public Date getData_pub() {
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
-        formatForDateNow.format(data_pub);
-        return data_pub;  }
-    public void setData_pub(Date data_pub) {  this.data_pub = data_pub;
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
-        formatForDateNow.format(this.data_pub);
-    }
+    public Date getData_pub() {  return data_pub;  }
+    public void setData_pub(Date data_pub) {  this.data_pub = data_pub;}
 
 }

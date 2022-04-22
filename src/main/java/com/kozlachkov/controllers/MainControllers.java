@@ -27,12 +27,9 @@ public class MainControllers {
 
     @GetMapping("/{id}") //отображение странички блога конкретного человека
     public String showBlog (@PathVariable ("id") int id, ModelMap modelMap){
-        /*boolean bool1= modelMap.containsValue("people");
-        boolean bool2 = modelMap.isEmpty();*/
         int qty1 = modelMap.size();
         modelMap.addAttribute("person", personDao.getPersonById(id));
         modelMap.addAttribute("userDB", personDao.getUsrById(id));
-        List<WebPost> wp = personDao.getAllPosts(id);
         modelMap.addAttribute("webPosts", personDao.getAllPosts(id));
         return ("/people/blog");
     }

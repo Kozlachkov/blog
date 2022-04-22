@@ -15,7 +15,7 @@ public class BlogMapper implements RowMapper<WebPost> {
         webPost.setId_note(resultSet.getInt("id_note"));
         webPost.setTitle(resultSet.getString("title"));
         webPost.setText(resultSet.getString("text"));
-        webPost.setData_pub(resultSet.getDate("data_pub"));
+        webPost.setData_pub(resultSet.getDate("date"));
         return webPost;
     }
 }
