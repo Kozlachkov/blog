@@ -35,6 +35,7 @@ public class RegistrationController {
 
     @GetMapping()
     public  String index(ModelMap modelMap, Map<String, Object> message3){
+        //если в таблице person есть хоть одна запись
         if (currentUser!=null && !personDao.PersonIsActive(currentUser)){
             return "redirect:new";
         }
@@ -42,30 +43,29 @@ public class RegistrationController {
         modelMap.addAttribute("usersDB", personDao.indexUserDB());
         if (currentUser!=null)  message3.put("message3", currentUser.getUsername());
         else message3.put("message3", "нет залогиненного пользователя");
-        return ("people/index");
+        return ("/people/index");
     }
 
     @GetMapping("/registration")
     public String loginPage(Model model) {
         model.addAttribute("userDB", new UserDB());
-        return "people/registration";
+        return "/people/registration";
     }
 
     @PostMapping("/new")  //Постим в БД Ник, переходим к вводу данных: имя, мыло..
     public String createNik(@ModelAttribute("userDB") @Valid UserDB userDB, BindingResult bindingResult,
                          Map<String, Object> model, Model model2) {
         if (bindingResult.hasErrors())
-            return "people/registration";
+            return "/people/registration";
         if (!userDB.getPassword().equals(userDB.getCheck_pass())) {
             model.put("message", "Повторный пароль не совпадает с оригиналом");
-            return "people/registration";
+            return "/people/registration";
         }
         if (personDao.getUsrByName(userDB.getUsername())!=null){
             model.put("message", "Юзер с таким ником уже существует");
-            return "people/registration";
+            return "/people/registration";
         }
         currentUser = personDao.createUser(userDB);
-
         return "redirect:/people/new";
     }
 
@@ -90,14 +90,14 @@ public class RegistrationController {
         person.setId(currentUser.getId());
         model.addAttribute("person", person);
         message1.put("message1", currentUser.getUsername());
-        return "people/new";
+        return "/people/new";
     }
 
     @PostMapping()
     public String createNewPerson(@ModelAttribute("person") @Valid Person person,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "people/new";
+            return "/people/new";
 
         personDao.save(person, currentUser);
         return "redirect:/people";

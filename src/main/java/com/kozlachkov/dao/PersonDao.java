@@ -31,7 +31,17 @@ public class PersonDao {
     }
 
     public List<WebPost> getAllPosts (int id){
-        return jdbcTemplate.query("SELECT* FROM blog WHERE id=?", new Object[]{id}, new BlogMapper());
+        try {
+            statement = connection.createStatement();
+            String SQL = "INSERT INTO person VALUE(" + 1 + ",'" + person.getName() +
+                    "'," + person.getAge() + ",'" + person.getEmail() + "')";
+            statement.executeUpdate(SQL);
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        //return jdbcTemplate.query("SELECT* FROM blog WHERE id=?", new Object[]{id}, new BlogMapper());
     }
 
     public UserDB createUser (UserDB userDB){
@@ -93,4 +103,28 @@ public class PersonDao {
     public void deleteRegisteredNik (int id){
         jdbcTemplate.update("DELETE FROM usr WHERE id=?", id);
     }
+
+    public boolean blogTableEmpty (int id){
+        boolean hasRecord = jdbcTemplate.query("SELECT 1 FROM blog WHERE id=?",
+                    new Object[]{id}, (ResultSet rs) -> {
+                                    if (rs.next()) {
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                        );
+        return hasRecord;
+    }
+
+    public WebPost getMaxNoteFromUsr (int id){
+        return jdbcTemplate.query("SELECT * FROM blog WHERE id_note = ( SELECT MAX(id_note) FROM blog ) AND WHERE id_note=?",
+                new Object[]{id}, new BlogMapper())
+                .stream().findFirst().orElse(null);
+    }
+
+    public void recordNote (WebPost webPost){
+        jdbcTemplate.update("INSERT INTO blog VALUE(?,?,?,?,?)",
+                webPost.getId(), webPost.getId_note(), webPost.getTitle(), webPost.getText(), webPost.getData_pub());
+    }
+
 }

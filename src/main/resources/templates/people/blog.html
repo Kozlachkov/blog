@@ -27,20 +27,18 @@
     </td>
     <td class="PaddingUsual1" align="left" valign="top"> 
     <br/>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        </br>
-        <div style="color:red" th:text="${message}"></div>
 
+        </br>
+        
         <table border="0" cellspacing="0" cellpadding="0" width="650" align="left">
            <tr>
            <td width="310">
 
-              
+              	<div th:each="webPost : ${webPosts}">
+            	  <p th:text="${webPost.getTitle()}">title</p>
+                  <p th:text="${webPost.getText()}">text</p>
+        	   </div>
+                
                 
                 <div>
                 <form th:action="@{/logout}" method="post">
