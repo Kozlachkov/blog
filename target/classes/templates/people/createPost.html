@@ -34,19 +34,20 @@
            <td width="310">
 
            	Creating the post:</br> <!--   th:object="${post1}" -->
+               <div style="color:red" th:text="${message}"></div>
              <form th:action="@{/people/{id}(id=${person.getId()})}" th:method="POST" th:object="${webPost}" >
                 <table border="0" cellspacing="0" cellpadding="0" width="600" align="left">
                         <tr>
                           <td class="PaddingUsual1" valign="top" align="left">Header:</br>
                               <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name Error</div>
-                              <input type="text" id="title" size="60" maxlength="100" style="background-color:#CCC; color:black" th:field="*{title}" />
+                              <input type="text" id="title" size="60" maxlength="100" placeholder="от одного до 50 символов" style="background-color:#CCC; color:black" th:field="*{title}" />
                           </td>
                         </tr>   
                        <tr>
                           <td class="PaddingUsual1" valign="top" align="left">Text for the post:</br>
                               <div style="color:red" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">Name Error</div>
                               <!-- <textarea id="text" cols="60" rows="4" style="background-color:#CCC; color:black" th:field="*{text}" /> -->
-                              <input type="text" id="text" size="60" maxlength="100" style="background-color:#CCC; color:black" th:field="*{text}" />
+                              <input type="text" id="text" size="60" maxlength="100" placeholder="поле не может быть пустым" style="background-color:#CCC; color:black" th:field="*{text}" />
                           </td>
                         </tr>              
                         <tr>  

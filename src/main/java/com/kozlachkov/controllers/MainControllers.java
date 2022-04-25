@@ -10,7 +10,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +38,6 @@ public class MainControllers {
 
     @GetMapping("/{id}/createPost") //форма написания поста
     public String createUserPost(@PathVariable("id") int id, ModelMap modelMap) {
-        int qty1 = modelMap.size();
         modelMap.addAttribute("person", personDao.getPersonById(id));
         modelMap.addAttribute("userDB", personDao.getUsrById(id));
         modelMap.addAttribute("webPost", new WebPost());
@@ -44,14 +45,16 @@ public class MainControllers {
     }
 
     @PostMapping("/{id}") //создаём пост
-    public String postUserPost(@ModelAttribute("webPost") WebPost webPost,
+    public String postUserPost(@ModelAttribute("webPost") @Valid WebPost webPost, BindingResult bindingResult,
                                @PathVariable("id") int id,
                                Map<String, Object> model) {
-        String str1 = "/people/{id}/createPost";
+        String str1 = "redirect:/people/"+id+"/createPost";
         String str2 = "redirect:/people/"+id;
-        //Person person = personDao.getPersonById(id);
-        /*if (bindingResult.hasErrors())
-            return "/people/1/createPost"; */
+        String str3 = "/people/"+id+"/edit";
+        if (bindingResult.hasErrors()) {
+            model.put("message", "Поля не могут быть пустыми. Заголовок не длиннее 50 символов");
+            return str3;
+        }
         webPost.setId(id);
         int num_post;
         if (personDao.blogTableEmpty(id))

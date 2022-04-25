@@ -10,10 +10,10 @@ import java.util.Date;
 public class WebPost {
     private int id;
     private int id_note;
-    //@NotEmpty(message = "Title should not be empty")
+    @NotEmpty(message = "Title should not be empty")
     //@Size(min = 1, max=50, message = "not less 2 and not more 50 symbols")
     private String title;
-    //@NotEmpty(message = "Text should not be empty")
+    @NotEmpty(message = "Text should not be empty")
     private String text;
     private Date data_pub;
 

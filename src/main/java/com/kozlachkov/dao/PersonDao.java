@@ -130,7 +130,7 @@ public class PersonDao {
     }
 
     public WebPost getMaxNoteFromUsr (int id){
-        return jdbcTemplate.query("SELECT * FROM blog WHERE id_note = ( SELECT MAX(id_note) FROM blog ) AND WHERE id=?",
+        return jdbcTemplate.query("SELECT * FROM blog WHERE id_note = ( SELECT MAX(id_note) FROM blog ) AND id=?",
                 new Object[]{id}, new BlogMapper())
                 .stream().findFirst().orElse(null);
     }

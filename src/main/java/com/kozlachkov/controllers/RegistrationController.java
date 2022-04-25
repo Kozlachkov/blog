@@ -109,12 +109,12 @@ public class RegistrationController {
         currentUser = null;
         return "redirect:/people";
     }
-/*
+
     @GetMapping("/test")
-    public String testPage (ModelMap modelMap2){
-        modelMap2.addAttribute("person",new Person());
+    public String testPage (/*ModelMap modelMap2*/){
+        /*modelMap2.addAttribute("person",new Person());
         modelMap2.addAttribute("userDB", new UserDB());
-        modelMap2.addAttribute("post1", new WebPost());
+        modelMap2.addAttribute("post1", new WebPost());*/
         return "people/test";
-    }*/
+    }
 }
