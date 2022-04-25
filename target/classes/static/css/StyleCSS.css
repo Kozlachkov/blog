@@ -18,6 +18,7 @@ img {border:0;}
  #ArticleHead2 {font-size: 17px; line-height:17px; color: #B43729; font-family:Georgia, "Times New Roman", Times, serif; }
  #ArticleHead2 a {color: #B43729;}
  .ArticleDate {font-size: 12px; line-height:12px; color: #666; text-align:right; }
+ .ArticleDate:hover {cursor:pointer;}
  .ArticleDate2 {font-size: 12px; line-height:12px; color: #666; text-align:left; }
  .ArticleDate2:hover {cursor:pointer;}
  .TextGeorgia {font-family:Georgia, "Times New Roman", Times, serif; margin:8px;}

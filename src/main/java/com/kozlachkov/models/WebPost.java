@@ -17,10 +17,7 @@ public class WebPost {
     private String text;
     private Date data_pub;
 
-    public WebPost(){
-        /*SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
-        formatForDateNow.format(this.data_pub);*/
-    }
+    public WebPost(){    }
 
     public WebPost(int id, int id_note, String title, String text, Date data_pub) {
         this.id = id;

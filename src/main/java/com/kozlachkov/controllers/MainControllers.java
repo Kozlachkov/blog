@@ -50,7 +50,7 @@ public class MainControllers {
                                Map<String, Object> model) {
         String str1 = "redirect:/people/"+id+"/createPost";
         String str2 = "redirect:/people/"+id;
-        String str3 = "/people/"+id+"/edit";
+        String str3 = "/people/createPost";
         if (bindingResult.hasErrors()) {
             model.put("message", "Поля не могут быть пустыми. Заголовок не длиннее 50 символов");
             return str3;
@@ -72,7 +72,6 @@ public class MainControllers {
         return "/people/edit";
     }
 
-    /*
         @PatchMapping("/{id}")
         public String update(@ModelAttribute("person") @Valid Person person,
                              BindingResult bindingResult,
@@ -87,7 +86,7 @@ public class MainControllers {
             personDao.delete(id);
             return "redirect:/people";
         }
-    */
+
     @GetMapping("/login")
     public String loginPage() {
         return "people/login";

@@ -26,31 +26,29 @@
       </div>   
     </td>
     <td class="PaddingUsual1" align="left" valign="top"> 
-    <br/>
+    <br/></br>
 
-        </br>
-        
-        <table border="0" cellspacing="0" cellpadding="0" width="650" align="left">
-           <tr>
-           <td width="310">
-
-              	<div th:each="webPost : ${webPosts}">
-            	  <p th:text="${webPost.getTitle()}">title</p>
-                  <p th:text="${webPost.getText()}">text</p>
-        	   </div>
-                
-                
-                <div>
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="Sign Out"/>
-                </form>
-                </div>
-                
-           </td>
-           </tr> 
-         </table>   
-
-
+        <span th:each="webPost : ${webPosts}">
+           <table border="0" cellspacing="0" cellpadding="0" width="650" align="left">
+             <tr>
+               <td width="600" class="ArticleHead">
+                      <span th:text="${webPost.getTitle()}">title</span>
+               </td>
+               <td></td>
+             </tr>
+             <tr>
+               <td colspan="2">         
+                      <span th:text="${webPost.getText()}">text</span>
+               </td>
+             </tr>
+             <tr>
+               <td class="ArticleDate"> 
+               		<span th:text="${webPost.getData_pub()}">text</span>
+               </td>
+               <td class="ArticleDate"> Edit</td>
+             </tr>  
+            </table> 
+        </span>
     </td>
     <td width="170px" class="LeftBorder1" align="center" valign="top">
     	</br></br>
@@ -58,13 +56,21 @@
             <input type="submit" value="Создать пост"/>
         </form>
         </br></br>
+        
         <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit user's data</a>
                 </br></br></br>
                 
          <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
              <input type="submit" value="Remove user"/>
          </form>
+         </br></br>
               
+         <div>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+         </div>
+                     
     </td>
   </tr>
  </table>
