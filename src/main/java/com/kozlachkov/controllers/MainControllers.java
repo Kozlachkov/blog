@@ -121,6 +121,22 @@ public class MainControllers {
             return "redirect:/people";
         }
 
+        @GetMapping("/{id}/{id_note}")
+        public String editPost(ModelMap modelMap, @PathVariable("id") int id, @PathVariable("id_note") int id_note) {
+            modelMap.addAttribute("person", personDao.getPersonById(id));
+            modelMap.addAttribute("userDB", personDao.getUsrById(id));
+            return "/people/edit2";
+        }
+
+        @PatchMapping("/{id}/{id_note}")
+        public String updatePost(@ModelAttribute("webPost") @Valid WebPost webPost,
+                             BindingResult bindingResult,
+                             @PathVariable("id") int id, @PathVariable("id_note") int id_note) {
+            if(bindingResult.hasErrors()) return "people/edit";
+            personDao.updatePost(id, id_note, webPost);
+            return "redirect:/people/{id}";
+        }
+
     @GetMapping("/login")
     public String loginPage() {
         return "people/login";

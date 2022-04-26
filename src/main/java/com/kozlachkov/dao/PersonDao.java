@@ -86,6 +86,12 @@ public class PersonDao {
                 .stream().findAny().orElse(null);
     }
 
+    public WebPost getPostById (int id, int id_note){
+        return jdbcTemplate.query("SELECT * FROM blog WHERE id=? AND id_note=?",
+                        new Object[]{id}, new Object[]{id_note}, new BlogMapper())
+                .stream().findAny().orElse(null);
+    }
+
     public boolean PersonIsActive(UserDB userDB) {
         Person person;
         try {
@@ -112,6 +118,11 @@ public class PersonDao {
     public void updateNik(int id, UserDB updatedUser) {
         jdbcTemplate.update("UPDATE usr SET username=?, password=?, check_pass=? WHERE id=?",
                 updatedUser.getUsername(), updatedUser.getPassword(), updatedUser.getCheck_pass(), id);
+    }
+
+    public void updatePost(int id, int id_note, WebPost updatedWebPost) {
+        jdbcTemplate.update("UPDATE blog SET title=?, text=? WHERE id=? AND id_note=?",
+                updatedWebPost.getTitle(), updatedWebPost.getText(), id, id_note);
     }
 
     public void delete (int id){
