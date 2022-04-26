@@ -109,8 +109,15 @@ public class PersonDao {
                 updatedPerson.getName(), updatedPerson.getAge(), updatedPerson.getEmail(), id);
     }
 
+    public void updateNik(int id, UserDB updatedUser) {
+        jdbcTemplate.update("UPDATE usr SET username=?, password=?, check_pass=? WHERE id=?",
+                updatedUser.getUsername(), updatedUser.getPassword(), updatedUser.getCheck_pass(), id);
+    }
+
     public void delete (int id){
         jdbcTemplate.update("DELETE FROM person WHERE id=?", id);
+        jdbcTemplate.update("DELETE FROM usr WHERE id=?", id);
+        jdbcTemplate.update("DELETE FROM blog WHERE id=?", id);
     }
 
     public void deleteRegisteredNik (int id){
@@ -129,10 +136,22 @@ public class PersonDao {
         return hasRecord;
     }
 
-    public WebPost getMaxNoteFromUsr (int id){
-        return jdbcTemplate.query("SELECT * FROM blog WHERE id_note = ( SELECT MAX(id_note) FROM blog ) AND id=?",
-                new Object[]{id}, new BlogMapper())
-                .stream().findFirst().orElse(null);
+    public int getMaxNoteFromUsr (int id){
+        try {
+            PreparedStatement preparedStatement = connection2.prepareStatement("SELECT MAX(id_note) AS num1 FROM blog WHERE id=?");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int num1= -1;
+            if (resultSet.next()) {
+                String temp = resultSet.getString("num1"); // "quantity" - псевдоним из запроса
+                num1 = Integer.parseInt(temp);
+            }
+            return num1;
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
     public void recordNote (WebPost webPost){

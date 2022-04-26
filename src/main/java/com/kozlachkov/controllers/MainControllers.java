@@ -2,6 +2,7 @@ package com.kozlachkov.controllers;
 
 import com.kozlachkov.dao.PersonDao;
 import com.kozlachkov.models.Person;
+import com.kozlachkov.models.UserDB;
 import com.kozlachkov.models.WebPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,12 +75,12 @@ public class MainControllers {
         webPost.setId(id);
         int num_post;
         if (personDao.blogTableEmpty(id))
-            num_post = personDao.getMaxNoteFromUsr(id).getId_note() +1;
+            num_post = personDao.getMaxNoteFromUsr(id)+1;
         else num_post=0;
         webPost.setId_note(num_post);
         webPost.setData_pub(new Date());
         personDao.recordNote(webPost);
-        return  str2; //"people/test";
+        return  str2;
     }
 
         @PatchMapping("/{id}")
@@ -94,6 +95,29 @@ public class MainControllers {
         @DeleteMapping("/{id}")
         public String delete (@PathVariable("id") int id){
             personDao.delete(id);
+            return "redirect:/people";
+        }
+
+        @GetMapping("/{id}/nik")
+        public String edit2(ModelMap modelMap, @PathVariable("id") int id) {
+            modelMap.addAttribute("person", personDao.getPersonById(id));
+            modelMap.addAttribute("userDB", personDao.getUsrById(id));
+            return "/people/edit2";
+        }
+
+        @PatchMapping("/{id}/nik")
+        public String updateNik(@ModelAttribute("userDB") @Valid UserDB userDB,
+                             BindingResult bindingResult,
+                             @PathVariable("id") int id, Map<String, Object> model, ModelMap modelMap) {
+            if(bindingResult.hasErrors())
+                return "people/edit2";
+            if (!userDB.getPassword().equals(userDB.getCheck_pass())) {
+                modelMap.addAttribute("person", personDao.getPersonById(id));
+                modelMap.addAttribute("userDB", personDao.getUsrById(id));
+                model.put("message2", "Повторный пароль не совпадает с оригиналом");
+                return "/people/edit2";
+            }
+            personDao.updateNik(id, userDB);
             return "redirect:/people";
         }
 

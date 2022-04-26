@@ -28,8 +28,8 @@
     <br/>
     	Registered users:
 
-        <div th:each="person : ${people}">
-            <a 	th:with="id1=${person.getId()}, nik=${usersDB.get(id1)}"
+        <div th:each="person, state : ${people}">
+            <a 	th:with="id1=${person.getId()}, nik=${usersDB.get(state.index)}"
                 th:href="@{/people/{id}(id=${person.getId()})}"
                 th:text="${person.getName()} + ' (c Ником: ' +${nik.getUsername()} + ') ' ">user</a>
         </div>
@@ -39,7 +39,7 @@
         </br></br></br>
         Activated user: </br>
         <div style="color:blue" th:text="${message3}"></div>
-
+	
 	</td>
     <td width="170px" class="LeftBorder1" align="center" valign="top">
 
