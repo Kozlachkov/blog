@@ -36,7 +36,7 @@ public class MainControllers {
         return ("/people/blog");
     }
 
-    @GetMapping("/{id}/createPost") //форма написания поста
+    @PostMapping("/{id}/createPost") //форма написания поста
     public String createUserPost(@PathVariable("id") int id, ModelMap modelMap) {
         modelMap.addAttribute("person", personDao.getPersonById(id));
         modelMap.addAttribute("userDB", personDao.getUsrById(id));
@@ -44,16 +44,32 @@ public class MainControllers {
         return "/people/createPost";
     }
 
+    @GetMapping("/{id}/createPost") //форма написания поста
+    public String createUserPost2(@PathVariable("id") int id, ModelMap modelMap) {
+        modelMap.addAttribute("person", personDao.getPersonById(id));
+        modelMap.addAttribute("userDB", personDao.getUsrById(id));
+        modelMap.addAttribute("webPost", new WebPost());
+        return "/people/createPost";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("person", personDao.getPersonById(id));
+        return "/people/edit";
+    }
+
     @PostMapping("/{id}") //создаём пост
     public String postUserPost(@ModelAttribute("webPost") @Valid WebPost webPost, BindingResult bindingResult,
                                @PathVariable("id") int id,
-                               Map<String, Object> model) {
-        String str1 = "redirect:/people/"+id+"/createPost";
+                               ModelMap modelMap, Map<String, Object> model) {
         String str2 = "redirect:/people/"+id;
-        String str3 = "/people/createPost";
+        String str3 = "/people/createPost/"+id;
         if (bindingResult.hasErrors()) {
-            model.put("message", "Поля не могут быть пустыми. Заголовок не длиннее 50 символов");
-            return str3;
+            modelMap.addAttribute("person", personDao.getPersonById(id));
+            modelMap.addAttribute("userDB", personDao.getUsrById(id));
+            modelMap.addAttribute("webPost", new WebPost());
+            model.put("message2", "Поля не могут быть пустыми. Заголовок не длиннее 50 символов");
+            return "/people/createPost";
         }
         webPost.setId(id);
         int num_post;
@@ -64,12 +80,6 @@ public class MainControllers {
         webPost.setData_pub(new Date());
         personDao.recordNote(webPost);
         return  str2; //"people/test";
-    }
-
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("person", personDao.getPersonById(id));
-        return "/people/edit";
     }
 
         @PatchMapping("/{id}")

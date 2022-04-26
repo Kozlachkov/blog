@@ -44,15 +44,17 @@
              <tr>
                <td class="ArticleDate"> 
                		<span th:text="${webPost.getData_pub()}">text</span>
-               </td>
-               <td class="ArticleDate"> Edit</td>
+               </td> 
+               <td class="ArticleDate">Edit
+                <!-- <span th:href="@{/webPost/{id}/{id_note}(id=${webPost.getId()}), id_note=${webPost.getId_note()})}">Edit</span> -->
+                </td>
              </tr>  
             </table> 
         </span>
     </td>
     <td width="170px" class="LeftBorder1" align="center" valign="top">
     	</br></br>
-        <form th:method="GET" th:action="@{/people/{id}/createPost(id=${person.getId()})}">
+        <form th:method="POST" th:action="@{/people/{id}/createPost(id=${person.getId()})}">
             <input type="submit" value="Создать пост"/>
         </form>
         </br></br>
