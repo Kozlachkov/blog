@@ -50,7 +50,7 @@
                		<span th:text="${webPost.getData_pub()}">text</span>
                </td> 
                <td class="ArticleDate">
-                 <span th:href="@{/webPost/{id}/{id_note}(id=${webPost.getId()}), id_note=${webPost.getId_note()})}">Edit</span> 
+                 <a th:href="@{/people/{id}/{id_note}(id=${webPost.getId()}, id_note=${webPost.getId_note()})}">Edit</a> 
                 </td>
              </tr>  
             </table> 

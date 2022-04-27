@@ -53,10 +53,19 @@ public class MainControllers {
         return "/people/createPost";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/{id}/edit") //форма редактирования person
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("person", personDao.getPersonById(id));
         return "/people/edit";
+    }
+
+    @PatchMapping("/{id}") // сохранение редактированного person
+    public String update(@ModelAttribute("person") @Valid Person person,
+                         BindingResult bindingResult,
+                         @PathVariable("id") int id) {
+        if(bindingResult.hasErrors()) return "people/edit";
+        personDao.update(id, person);
+        return "redirect:/people";
     }
 
     @PostMapping("/{id}") //создаём пост
@@ -82,15 +91,6 @@ public class MainControllers {
         personDao.recordNote(webPost);
         return  str2;
     }
-
-        @PatchMapping("/{id}")
-        public String update(@ModelAttribute("person") @Valid Person person,
-                             BindingResult bindingResult,
-                             @PathVariable("id") int id) {
-            if(bindingResult.hasErrors()) return "people/edit";
-            personDao.update(id, person);
-            return "redirect:/people";
-        }
 
         @DeleteMapping("/{id}")
         public String delete (@PathVariable("id") int id){
@@ -123,9 +123,8 @@ public class MainControllers {
 
         @GetMapping("/{id}/{id_note}")
         public String editPost(ModelMap modelMap, @PathVariable("id") int id, @PathVariable("id_note") int id_note) {
-            modelMap.addAttribute("person", personDao.getPersonById(id));
-            modelMap.addAttribute("userDB", personDao.getUsrById(id));
-            return "/people/edit2";
+            modelMap.addAttribute("webPost", personDao.getPostById(id,id_note));
+            return "/people/editPost";
         }
 
         @PatchMapping("/{id}/{id_note}")

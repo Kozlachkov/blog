@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Update person</title>
+    <title>Update post</title>
     <link href="../../static/css/StyleCSS.css" th:href="@{/css/StyleCSS.css}" rel="stylesheet" type="text/css" media="all" />
 </head>
 
@@ -12,7 +12,7 @@
 <!-- HEADER -->
 <table width="1000px" border="0" align="center" cellpadding="0" cellspacing="0" >
     <tr height="40px" >
-        <td width="400px" class="TextName" align="center">Blogs</td>
+        <td width="400px" class="TextName" align="center">Редактирование поста</td>
         <td> <img src="../../static/images/heading.jpg" th:src="@{/images/heading.jpg}" width="624px"  height="40" /></td>
     </tr>
 </table>
@@ -28,7 +28,7 @@
             <br/>
             Редактируем пост:</br> <!--   th:object="${post1}" -->
                <div style="color:red" th:text="${message2}"></div>
-             <form th:action="@{/people/{id}(id=${person.getId()})}" th:method="PATCH" th:object="${webPost}" >
+             <form th:action="@{/people/{id}/{id_note}(id=${webPost.getId()}, id_note=${webPost.getId_note()})}" th:method="PATCH" th:object="${webPost}" >
                 <table border="0" cellspacing="0" cellpadding="0" width="600" align="left">
                         <tr>
                           <td class="PaddingUsual1" valign="top" align="left">Header:</br>
@@ -45,13 +45,13 @@
                         </tr>              
                         <tr>  
                           <td class="PaddingUsual1" valign="top" align="left" >
-                          	<input type="submit" value="Send" style="background-color:#CCC; color:black" />
+                          	<input type="submit" value="Update" style="background-color:#CCC; color:black" />
                           </td>
                         </tr>
                 </table>
             </form>  
             </br></br>
-            <a 	th:href="@{/people/{id}(id=${person.getId()})}">Вернуться в блог</a>
+            <a 	th:href="@{/people/{id}(id=${webPost.getId()})}">Вернуться в блог</a>
         </td>
         <td width="170px" class="LeftBorder1" align="center" valign="top">
 

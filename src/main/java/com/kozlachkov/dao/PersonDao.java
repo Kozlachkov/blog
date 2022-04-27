@@ -88,7 +88,7 @@ public class PersonDao {
 
     public WebPost getPostById (int id, int id_note){
         return jdbcTemplate.query("SELECT * FROM blog WHERE id=? AND id_note=?",
-                        new Object[]{id}, new Object[]{id_note}, new BlogMapper())
+                        new Object[]{id,id_note}, new BlogMapper())
                 .stream().findAny().orElse(null);
     }
 
