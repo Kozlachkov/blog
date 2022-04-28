@@ -138,7 +138,7 @@ public class MainControllers {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "people/login";
+        return "login";
     }
 
 }

@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/people", "/people/registration").permitAll()
+                    .antMatchers("/people", "/people/registration", "/people/new").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("select username, password, active from usr where username=?")
                 //система находит пользователя по его имени
-                .authoritiesByUsernameQuery("select u.username, ur.roles from usr u inner join user_role ur on u.id = ur.user_id wher u.usermane=?"); //получение списка пользователей с их ролями
+                .authoritiesByUsernameQuery("select u.username, ur.roles from usr u inner join user_role ur on u.id = ur.user_id where u.usermane=?"); //получение списка пользователей с их ролями
         //из табл. usr, присоединенной к ней табл user_role соединенные через поля id и user_id выбираем поля username и roles
 
     }
