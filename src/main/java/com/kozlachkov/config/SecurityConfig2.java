@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.sql.DataSource;
+
 
 @Configuration
 @EnableWebSecurity
@@ -36,14 +36,21 @@ public class SecurityConfig2 extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     //.antMatchers("/admin").hasRole("ADMIN")
                     //.antMatchers("/people").hasAnyRole("USER", "ADMIN")
-                    .antMatchers("/people", "/people/registration", "/people/new", "static/css", "static/js").permitAll()
+                    .antMatchers("/people", "people/login", "/people/registration", "/people/new", "static/css", "static/js").permitAll()
                     .regexMatchers("/people/(\\d+)").permitAll()
+                    //.regexMatchers("/people/(\\d+)").
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/people")
-                    .loginProcessingUrl("people/login")
-                    .defaultSuccessUrl("/people", true);
+                    .loginProcessingUrl("/people/login")
+                    .defaultSuccessUrl("/people", true)
+                    .permitAll()
+                    .and()
+                .logout()
+                    .logoutUrl("/people/logout")
+                    .logoutSuccessUrl("/people")
+                    .permitAll();
     }
 
 }

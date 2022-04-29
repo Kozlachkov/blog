@@ -136,10 +136,7 @@ public class MainControllers {
             return "redirect:/people/{id}";
         }
 
-    @PostMapping("/login")
-    public String loginPage() {
-        return "/people";
-    }
+
 
 }
 
