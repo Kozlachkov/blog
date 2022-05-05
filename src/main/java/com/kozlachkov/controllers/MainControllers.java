@@ -145,7 +145,10 @@ public class MainControllers {
             return "redirect:/people/{id}";
         }
 
-
+        @RequestMapping("/403")
+        public String error () {
+            return "/people/error403";
+        }
 
 }
 

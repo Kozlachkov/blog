@@ -46,7 +46,7 @@ public class RegistrationController {
         return ("/people/index");
     }
 
-    @GetMapping("/registration")
+    @GetMapping("/registration") //регистрация: Ник и пароль
     public String loginPage(Model model) {
         model.addAttribute("userDB", new UserDB());
         return "/people/registration";
@@ -69,22 +69,7 @@ public class RegistrationController {
         return "redirect:/people/new";
     }
 
-    //@PostMapping("/registration")
-   // public String addUser(@ModelAttribute("userDB") UserDB userDB,) {
-        /*UserDB userFromDB = userRepo.findByUsername(userDB.getUsername());
-        if (userFromDB!=null){
-            model.put("message", "user with such Username exists");
-            return ("/people/registration");
-            //если пользователь существует, сообщаем об этом
-        }*/
-        /*
-        userDB.setActive(true);
-        userDB.setRoles(Collections.singleton(Roles.USER));//Коллекция с одним значением, т.к. в ENUM одно
-        userRepo.save(userDB);*/
-        //return "redirect:/people/new";
-    //}
-
-    @GetMapping("/new")
+    @GetMapping("/new") //отображаем поля ввода Имени, возраста, мыла
     public String createNewPerson(Model model, Map<String, Object> message1) {
         Person person = new Person();
         person.setId(currentUser.getId());

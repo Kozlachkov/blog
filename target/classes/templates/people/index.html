@@ -43,12 +43,13 @@
 	</td>
     <td width="170px" class="LeftBorder1" align="center" valign="top">
         </br></br>
-        <div th:if="${param.error}">
-            Invalid username and password.
+        <div style="color:red" th:if="${param.error}">
+            Ошибка логина </br>или пароля
         </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
+        <div style="color:red" th:if="${param.logout}">
+            Вы разлогинились
         </div>
+        <div style="color:red" th:text="${message4}">  </div>
         Залогиньтесь:</br></br>
 
         <form th:action="@{/people/login}" method="POST">
