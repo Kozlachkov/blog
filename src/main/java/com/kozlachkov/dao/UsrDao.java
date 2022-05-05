@@ -18,4 +18,9 @@ public class UsrDao {
         return jdbcTemplate.query("SELECT* FROM usr WHERE username=?", new Object[]{name}, new UsrMapper())
                 .stream().findFirst().orElse(null);
     }
+
+    public static UserDB getUsrById (int id){
+        return jdbcTemplate.query("SELECT* FROM usr WHERE id=?", new Object[]{id}, new UsrMapper())
+                .stream().findFirst().orElse(null);
+    }
 }

@@ -63,9 +63,9 @@
         </form>
         </br></br>
         
-        <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit user's data</a>
+        <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Поправить имя,</br> возраст, мыло</a>
                 </br></br></br>
-        <a th:href="@{/people/{id}/nik(id=${userDB.getId()})}">Edit Registration data</a>      
+        <a th:href="@{/people/{id}/nik(id=${userDB.getId()})}">Изменить Ник</a>      
 	        </br></br></br>  
                 
          <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">

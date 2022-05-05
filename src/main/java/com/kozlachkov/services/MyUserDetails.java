@@ -18,10 +18,13 @@ import static com.kozlachkov.dao.PersonDao.*;
 
 public class MyUserDetails implements UserDetails {
     private String username;
-    private UserDB userDB;
+    public UserDB userDB;
     public MyUserDetails(String username) {
         this.username = username;
         this.userDB = UsrDao.getUsrByName(username);
+    }
+    public MyUserDetails(int id) {
+        this.userDB = UsrDao.getUsrById(id);
     }
     public MyUserDetails() {  }
 

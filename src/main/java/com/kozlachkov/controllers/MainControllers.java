@@ -5,11 +5,14 @@ import com.kozlachkov.models.Person;
 import com.kozlachkov.models.UserDB;
 import com.kozlachkov.models.WebPost;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -38,6 +41,7 @@ public class MainControllers {
     }
 
     @PostMapping("/{id}/createPost") //форма написания поста
+    @PreAuthorize("#id == authentication.principal.userDB.id")
     public String createUserPost(@PathVariable("id") int id, ModelMap modelMap) {
         modelMap.addAttribute("person", personDao.getPersonById(id));
         modelMap.addAttribute("userDB", personDao.getUsrById(id));
@@ -46,6 +50,7 @@ public class MainControllers {
     }
 
     @GetMapping("/{id}/createPost") //форма написания поста
+    @PreAuthorize("#id == authentication.principal.userDB.id")
     public String createUserPost2(@PathVariable("id") int id, ModelMap modelMap) {
         modelMap.addAttribute("person", personDao.getPersonById(id));
         modelMap.addAttribute("userDB", personDao.getUsrById(id));
@@ -54,6 +59,7 @@ public class MainControllers {
     }
 
     @GetMapping("/{id}/edit") //форма редактирования person
+    @PreAuthorize("#id == authentication.principal.userDB.id")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("person", personDao.getPersonById(id));
         return "/people/edit";
@@ -93,12 +99,14 @@ public class MainControllers {
     }
 
         @DeleteMapping("/{id}")
+        @PreAuthorize("#id == authentication.principal.userDB.id")
         public String delete (@PathVariable("id") int id){
             personDao.delete(id);
             return "redirect:/people";
         }
 
         @GetMapping("/{id}/nik")
+        @PreAuthorize("#id == authentication.principal.userDB.id")
         public String edit2(ModelMap modelMap, @PathVariable("id") int id) {
             modelMap.addAttribute("person", personDao.getPersonById(id));
             modelMap.addAttribute("userDB", personDao.getUsrById(id));
@@ -122,6 +130,7 @@ public class MainControllers {
         }
 
         @GetMapping("/{id}/{id_note}")
+        @PreAuthorize("#id == authentication.principal.userDB.id")
         public String editPost(ModelMap modelMap, @PathVariable("id") int id, @PathVariable("id_note") int id_note) {
             modelMap.addAttribute("webPost", personDao.getPostById(id,id_note));
             return "/people/editPost";

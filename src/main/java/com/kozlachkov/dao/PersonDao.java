@@ -45,6 +45,8 @@ public class PersonDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    public PersonDao(){}
+
     public List<Person> index (){
         return jdbcTemplate.query("SELECT* FROM person", new PersonMapper());
     }
