@@ -31,15 +31,6 @@ public class MainControllers {
         this.personDao = personDao;
     }
 
-    @GetMapping("/{id}") //отображение странички блога конкретного человека
-    public String showBlog (@PathVariable ("id") int id, ModelMap modelMap){
-        int qty1 = modelMap.size();
-        modelMap.addAttribute("person", personDao.getPersonById(id));
-        modelMap.addAttribute("userDB", personDao.getUsrById(id));
-        modelMap.addAttribute("webPosts", personDao.getAllPosts(id));
-        return ("/people/blog");
-    }
-
     @PostMapping("/{id}/createPost") //форма написания поста
     @PreAuthorize("#id == authentication.principal.userDB.id")
     public String createUserPost(@PathVariable("id") int id, ModelMap modelMap) {
@@ -97,13 +88,6 @@ public class MainControllers {
         personDao.recordNote(webPost);
         return  str2;
     }
-
-        @DeleteMapping("/{id}")
-        @PreAuthorize("#id == authentication.principal.userDB.id")
-        public String delete (@PathVariable("id") int id){
-            personDao.delete(id);
-            return "redirect:/people";
-        }
 
         @GetMapping("/{id}/nik")
         @PreAuthorize("#id == authentication.principal.userDB.id")

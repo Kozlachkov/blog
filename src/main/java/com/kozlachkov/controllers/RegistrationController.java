@@ -7,13 +7,18 @@ import com.kozlachkov.models.UserDB;
 //import com.kozlachkov.repos.UserRepo;
 import com.kozlachkov.models.WebPost;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Collections;
 import java.util.Map;
 
@@ -29,21 +34,39 @@ public class RegistrationController {
     }
 
     private UserDB currentUser;
-/*
+
+    public UserDB getCurrentUser() {return currentUser; }
+    public void setCurrentUser(UserDB currentUser) {
+        this.currentUser = currentUser;
+    }
+    /*
     @Autowired
     private UserRepo userRepo;*/
 
     @GetMapping()
-    public  String index(ModelMap modelMap, Map<String, Object> message3){
+    public  String index(ModelMap modelMap, Map<String, Object> message3, Principal principal){
         //если в таблице person есть хоть одна запись
         if (currentUser!=null && !personDao.PersonIsActive(currentUser)){
             return "redirect:new";
         }
         modelMap.addAttribute("people", personDao.index());
         modelMap.addAttribute("usersDB", personDao.indexUserDB());
-        if (currentUser!=null)  message3.put("message3", currentUser.getUsername());
-        else message3.put("message3", "нет залогиненного пользователя");
+
+        if (principal!=null)  message3.put("message3", principal.getName());
+        else message3.put("message3", "НИКТО");
+
         return ("/people/index");
+    }
+
+    @GetMapping("/{id}") //отображение странички блога конкретного человека
+    public String showBlog (@PathVariable ("id") int id, ModelMap modelMap){
+        if (currentUser!=null && !personDao.PersonIsActive(currentUser)){
+            return "redirect:new";
+        }
+        modelMap.addAttribute("person", personDao.getPersonById(id));
+        modelMap.addAttribute("userDB", personDao.getUsrById(id));
+        modelMap.addAttribute("webPosts", personDao.getAllPosts(id));
+        return ("/people/blog");
     }
 
     @GetMapping("/registration") //регистрация: Ник и пароль
@@ -80,18 +103,34 @@ public class RegistrationController {
 
     @PostMapping()
     public String createNewPerson(@ModelAttribute("person") @Valid Person person,
-                         BindingResult bindingResult) {
+                         BindingResult bindingResult, Principal principal, HttpServletRequest request) {
         if (bindingResult.hasErrors())
             return "/people/new";
 
         personDao.save(person, currentUser);
-        return "redirect:/people";
+        if(principal != null) {
+            HttpSession session = request.getSession();
+            session.invalidate();
+            SecurityContextHolder.clearContext();
+        }
+            return "redirect:/people";
     }
 
-    @GetMapping("/removeNik")
+    @GetMapping("/removeNik") //удаляем UserDB, когда не закончили регистрацию
     public String deleteNik (){
         personDao.deleteRegisteredNik(currentUser.getId());
         currentUser = null;
+        return "redirect:/people";
+    }
+
+    @DeleteMapping("/{id}") //Полностью удаляем пользователя
+    @PreAuthorize("#id == authentication.principal.userDB.id")
+    public String delete (@PathVariable("id") int id, HttpServletRequest request){
+        personDao.delete(id);
+        currentUser = null;
+        HttpSession session = request.getSession();
+        session.invalidate();
+        SecurityContextHolder.clearContext();
         return "redirect:/people";
     }
 
