@@ -42,9 +42,7 @@ public class SecurityConfig2 extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    //.antMatchers("/admin").hasRole("ADMIN")
-                    //.antMatchers("/people").hasAnyRole("USER", "ADMIN")
-                    //.antMatchers("/css/**", "/js/**").permitAll()
+                    //.antMatchers("/people/**").hasRole("ADMIN")
                     .antMatchers("/people", "people/login", "/people/registration", "/people/new", "/images/**", "/css/**", "/js/**").permitAll()
                     .regexMatchers("/people/(\\d+)").permitAll()
                     .mvcMatchers("/people/{id}/**").authenticated()
@@ -59,7 +57,9 @@ public class SecurityConfig2 extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutUrl("/people/logout")
                     .logoutSuccessUrl("/people")
-                    .permitAll();
+                    .permitAll()
+                    .and()
+                .exceptionHandling().accessDeniedPage("/people/403");
     }
 
 }
