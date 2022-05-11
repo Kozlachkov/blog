@@ -123,7 +123,7 @@ public class RegistrationController {
         return "redirect:/people";
     }
 
-    @DeleteMapping("/{id}") //Полностью удаляем пользователя
+    @DeleteMapping("/{id}/remove") //Полностью удаляем пользователя
     @PreAuthorize("#id == authentication.principal.userDB.id")
     public String delete (@PathVariable("id") int id, HttpServletRequest request){
         personDao.delete(id);

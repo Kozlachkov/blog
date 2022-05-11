@@ -130,9 +130,13 @@ public class MainControllers {
         }
 
         @RequestMapping("/403")
-        public String error () {
+        public String error403 () {
             return "/people/error403";
         }
 
+        @RequestMapping("/error")
+        public String error () {
+            return "/people/error403";
+        }
 }
 

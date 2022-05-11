@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Registration</title>
+    <link href="../../static/css/StyleCSS.css" th:href="@{/css/StyleCSS.css}" rel="stylesheet" type="text/css" media="all" />
+    <!--    <script language="JavaScript">
+        function check2(frm, str1){
+           var str2 = frm.word1.value;
+           var i=str1.search(str2);
+           if (i==0){frm.word1.style.color='black'}
+           else {frm.word1.style.color='red'}
+           if (str2==str1) {frm.word1.style.color='blue'}
+        }
+        </script> -->
+</head>
+
+<body>
+    <table width="1000px" border="0" align="center" cellpadding="0" cellspacing="0" >
+      <tr height="40px" >
+        <td width="400px" class="TextName" align="center">Registration form</td>
+        <td> <img src="../../static/images/heading.jpg" th:src="@{/images/heading.jpg}" width="624px"  height="40" /></td>
+      </tr>
+    </table>
+ <table  width="1000px" border="0" align="center" cellpadding="0" cellspacing="0">  
+  <tr height="400px">
+    <td width="170px" class="RightBorder1" align="center" valign="top">
+      <div class=" TextGeorgia">
+			left column           
+      </div>   
+    </td>
+    <td class="PaddingUsual1" align="left" valign="top"> 
+    <br/>
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        Add new user </br>
+        <div style="color:red" th:text="${message}"></div>
+
+        <table border="0" cellspacing="0" cellpadding="0" width="650" align="left">
+           <tr>
+           <td width="310">
+           	Registration form:
+            <form th:action="@{/people/new}" th:method="POST" th:object="${userDB}">
+                <table border="0" cellspacing="0" cellpadding="0" width="300" align="left">
+                        <tr>
+                          <td width="130" class="PaddingUsual1" valign="top" align="left">Choose the Nikname:
+                              <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</div>
+                          </td>
+                          <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="username" size="10" maxlength="15" style="background-color:#CCC; color:black" th:field="*{username}" /></td>
+                        </tr>                   
+                        <tr>
+                          <td class="PaddingUsual1" valign="top" align="left">Choose the password:
+                              <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</div>
+                          </td>
+                          <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="reg_pass" size="10" maxlength="25" style="background-color:#CCC; color:black" th:field="*{password}" /></td>
+                        </tr>
+                        <tr>
+                          <td class="PaddingUsual1" valign="top" align="left">Repeat the password:
+                              <div style="color:red" th:if="${#fields.hasErrors('check_pass')}" th:errors="*{check_pass}">Name Error</div>
+                          </td>
+                          <td class="PaddingUsual1" valign="top" align="left" ><input type="text" id="reg_pass_check" size="10" maxlength="25" style="background-color:#CCC; color:black" th:field="*{check_pass}"/></td>
+                        </tr>
+                        <tr>  
+                          <td class="PaddingUsual1" valign="top" align="left" ><input type="submit" value="Create" style="background-color:#CCC; color:black" /></td>
+                          <td> </td>
+                        </tr>
+                </table>
+            </form>
+           </td>
+           <td width="30"> </td>
+           <td align="center">
+           		После регистрации нужно будет ввести дополнительные данные: Имя, возраст и email
+           </td>
+           </tr> 
+         </table>   
+
+
+    </td>
+    <td width="170px" class="LeftBorder1" align="center" valign="top">
+    </td>
+  </tr>
+ </table>
+        
+</body>
+</html>

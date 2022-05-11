@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Update person</title>
+    <link href="../../static/css/StyleCSS.css" th:href="@{/css/StyleCSS.css}" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+<body>
+<!-- HEADER -->
+<table width="1000px" border="0" align="center" cellpadding="0" cellspacing="0" >
+    <tr height="40px" >
+        <td width="400px" class="TextName" align="center">Blogs</td>
+        <td> <img src="../../static/images/heading.jpg" th:src="@{/images/heading.jpg}" width="624px"  height="40" /></td>
+    </tr>
+</table>
+
+<table  width="1000px" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr height="400px">
+        <td width="170px" class="RightBorder1" align="center" valign="top">
+            <div class=" TextGeorgia">
+                левая колонка
+            </div>
+        </td>
+        <td class="PaddingUsual1" align="left" valign="top">
+            <br/>
+            <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+                <label for="name">Enter name: </label>
+                <input type="text" th:field="*{name}" id="name"/>
+                <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
+                <br/>
+                <label for="age">Enter age:    </label>
+                <input type="text" th:field="*{age}" id="age"/>
+                <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Error</div>
+                <br/>
+                <label for="email">Enter E-mail: </label>
+                <input type="text" th:field="*{email}" id="email"/>
+                <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</div>
+                <br/>
+                <input type="submit" value="Update!"/>
+            </form>
+        </td>
+        <td width="170px" class="LeftBorder1" align="center" valign="top">
+
+        </td>
+    </tr>
+</table>
+
+
+</body>
+
+</html>
