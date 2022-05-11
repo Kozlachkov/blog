@@ -68,7 +68,7 @@
         <a th:href="@{/people/{id}/nik(id=${userDB.getId()})}">Изменить Ник</a>      
 	        </br></br></br>  
                 
-         <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
+         <form th:method="DELETE" th:action="@{/people/{id}/remove(id=${person.getId()})}">
              <input type="submit" value="Remove user"/>
          </form>
          </br></br>
